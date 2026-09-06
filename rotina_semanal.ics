@@ -258,11 +258,41 @@ DTSTART:20260912T143000
 DTEND:20260912T180000
 RRULE:FREQ=WEEKLY;BYDAY=SA
 SUMMARY:🧹 Faxina Geral da Casa (Bloco Único)
-DESCRIPTION:Limpar toda a casa logo ao chegar do trabalho. Em seguida: banho, casa da mãe e noite livre!
+DESCRIPTION:Limpar toda a casa logo ao chegar do trabalho. Em seguida: preparação e religião às 19h!
 BEGIN:VALARM
 TRIGGER:-PT10M
 ACTION:DISPLAY
 DESCRIPTION:Lembrete: Faxina da casa logo ao chegar
+END:VALARM
+END:VEVENT
+
+BEGIN:VEVENT
+UID:rotina-preparacao-sab@antigravity
+DTSTAMP:20260906T120000Z
+DTSTART:20260912T180000
+DTEND:20260912T190000
+RRULE:FREQ=WEEKLY;BYDAY=SA
+SUMMARY:🚿 Banho, Preparação e Saída (Religião)
+DESCRIPTION:Banho pós-faxina, troca de roupa e saída para o compromisso religioso.
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:Lembrete: Preparar e sair para a religião (início às 18h)
+END:VALARM
+END:VEVENT
+
+BEGIN:VEVENT
+UID:rotina-religiao-sab@antigravity
+DTSTAMP:20260906T120000Z
+DTSTART:20260912T190000
+DTEND:20260912T220000
+RRULE:FREQ=WEEKLY;BYDAY=SA
+SUMMARY:🕊️ Religião / Prática Espiritual
+DESCRIPTION:Compromisso religioso semanal pontualmente às 19h.
+BEGIN:VALARM
+TRIGGER:-PT15M
+ACTION:DISPLAY
+DESCRIPTION:Lembrete: Religião às 19h
 END:VALARM
 END:VEVENT
 

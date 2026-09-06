@@ -48,7 +48,8 @@ Bem-vindo ao repositório central da sua **Rotina Semanal**. Todos os arquivos e
 | Academia | 5x na semana | Ter/Qua/Qui das 08h30 às 10h00 (manhã); Seg/Sex às 18h15 no trajeto de volta do trabalho |
 | Faculdade EAD | 6h00 semanais | Seg (20h30-22h30), Ter (11h30-13h00), Qua (11h30-12h35), Sáb (19h30-21h00) |
 | Curso Prático Contábil | 2h15 semanais | Ter (13h00-14h15), Qui (11h30-12h30) — foco em exercícios práticos para vagas |
-| Faxina da Casa | Sábado às 14h30 | Limpeza contínua (3h30) logo após chegar do trabalho; noite de sábado e domingo livres |
+| Faxina da Casa | Sábado às 14h30 | Limpeza contínua (3h30) logo após chegar do trabalho (14h30 às 18h00) |
+| Religião (Sábado) | Sábado às 19h00 | Preparação e banho às 18h00; compromisso religioso das 19h00 às 22h00 |
 | Psicóloga & Espiritualidade | Domingo (08h às 10h) | Psicóloga quinzenal (08h-08h50) + 1h de Espiritualidade reservada (09h-10h) |
 | Namorada | Todas as noites + Domingo | Visitas rápidas e ligações diárias (23h-00h30) + Domingo livre |
 | Janela de Sono | ~7 horas diárias | Protegida das 00h45 às 07h00/07h30 para máxima disposição física e mental |
