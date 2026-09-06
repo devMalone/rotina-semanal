@@ -820,101 +820,100 @@
     const ROUTINE_DATA = {
       // 1: Segunda-Feira
       1: [
-        { id: 'seg-1', start: '07:00', end: '07:35', title: 'Acordar, Higiene e Café', cat: 'Pessoal', desc: 'Desjejum, higiene matinal e saída a pé para o trabalho às 07h35.', note: 'Deslocamento a pé (25 min)' },
-        { id: 'seg-2', start: '08:00', end: '11:00', title: 'Trabalho (Turno Manhã)', cat: 'Trabalho', desc: 'Primeiro bloco do expediente de segunda-feira.' },
-        { id: 'seg-3', start: '11:00', end: '12:00', title: 'Almoço & Buscar Marmitas', cat: 'Alimentação', desc: 'Passa em casa pegar kit, busca as duas marmitas na prefeitura e almoça no trabalho.', note: 'Almoço fixo às 11h' },
-        { id: 'seg-4', start: '12:00', end: '18:00', title: 'Trabalho (Turno Tarde)', cat: 'Trabalho', desc: 'Segundo bloco do expediente de trabalho.' },
-        { id: 'seg-5', start: '18:15', end: '19:15', title: 'Academia (No Caminho de Casa)', cat: 'Saúde', desc: 'Treino de 1 hora aproveitando o trajeto de retorno do trabalho.', note: 'A caminho de casa' },
-        { id: 'seg-6', start: '19:15', end: '19:35', title: 'Deslocamento para Casa', cat: 'Deslocamento', desc: 'Caminhada tranquila da academia até em casa.' },
-        { id: 'seg-7', start: '19:35', end: '20:30', title: 'Banho, Janta e Descanso', cat: 'Pessoal', desc: 'Banho relaxante pós-treino, jantar e descompressão.' },
-        { id: 'seg-8', start: '20:30', end: '22:30', title: 'Estudos: Faculdade EAD', cat: 'Estudos', desc: 'Ciências Contábeis: 2 horas de leitura teórica, módulos e conceitos densos.' },
-        { id: 'seg-9', start: '22:30', end: '23:00', title: 'Organização Pessoal', cat: 'Pessoal', desc: 'Ajuste de materiais e preparação para o momento com a namorada.' },
-        { id: 'seg-10', start: '23:00', end: '00:30', title: 'Namorada (Visita + Ligação)', cat: 'Relacionamento', desc: 'Visita rápida de 10 min + ligação do casal antes de dormir.' },
-        { id: 'seg-11', start: '00:45', end: '07:00', title: 'Sono Reparador', cat: 'Descanso', desc: 'Janela de sono de 6h15 com foco em descanso profundo.' }
+        { id: 'seg-1', start: '07:00', end: '07:35', title: 'Acordar', cat: 'Pessoal', desc: 'Desjejum e saída às 07h35.', note: 'Deslocamento 25 min' },
+        { id: 'seg-2', start: '08:00', end: '11:00', title: 'Trabalho', cat: 'Trabalho', desc: 'Turno da manhã.' },
+        { id: 'seg-3', start: '11:00', end: '12:00', title: 'Almoço', cat: 'Alimentação', desc: 'Pegar marmitas na prefeitura e almoçar.', note: 'Almoço às 11h' },
+        { id: 'seg-4', start: '12:00', end: '18:00', title: 'Trabalho', cat: 'Trabalho', desc: 'Turno da tarde.' },
+        { id: 'seg-5', start: '18:15', end: '19:15', title: 'Academia', cat: 'Saúde', desc: 'Treino de 1 hora na volta do trabalho.' },
+        { id: 'seg-6', start: '19:15', end: '19:35', title: 'Deslocamento', cat: 'Deslocamento', desc: 'Volta para casa a pé.' },
+        { id: 'seg-7', start: '19:35', end: '20:30', title: 'Banho e Janta', cat: 'Pessoal', desc: 'Banho e refeição da noite.' },
+        { id: 'seg-8', start: '20:30', end: '22:30', title: 'Faculdade EAD', cat: 'Estudos', desc: 'Estudo teórico de Ciências Contábeis.' },
+        { id: 'seg-9', start: '22:30', end: '23:00', title: 'Organização', cat: 'Pessoal', desc: 'Organização pessoal.' },
+        { id: 'seg-10', start: '23:00', end: '00:30', title: 'Namorada', cat: 'Relacionamento', desc: 'Visita e ligação.' },
+        { id: 'seg-11', start: '00:45', end: '07:00', title: 'Dormir', cat: 'Descanso', desc: 'Descanso noturno.' }
       ],
 
       // 2: Terça-Feira
       2: [
-        { id: 'ter-1', start: '07:30', end: '08:30', title: 'Acordar e Café com Calma', cat: 'Pessoal', desc: 'Acordar tranquilo garantindo 7h de sono reparador e café da manhã.' },
-        { id: 'ter-2', start: '08:30', end: '10:00', title: 'Academia (Treino Matinal)', cat: 'Saúde', desc: 'Ida a pé + 1 hora de treino com foco + volta sem correria.', note: 'Manhã livre' },
-        { id: 'ter-3', start: '10:00', end: '10:45', title: 'Banho e Lanche Pós-Treino', cat: 'Saúde', desc: 'Higiene e recuperação muscular.' },
-        { id: 'ter-4', start: '10:50', end: '11:30', title: 'Almoço & Pegar Marmita', cat: 'Alimentação', desc: 'Pega a marmita rapidamente (10 min) e almoça às 11h.', note: 'Almoço fixo às 11h' },
-        { id: 'ter-5', start: '11:30', end: '13:00', title: 'Estudos: Faculdade EAD', cat: 'Estudos', desc: '1h30 de dedicação a textos, videoaulas e matérias conceituais.' },
-        { id: 'ter-6', start: '13:00', end: '14:15', title: 'Estudos: Curso Prático Contábil', cat: 'Estudos', desc: '1h15 focado em exercícios práticos e ferramentas de mercado para vagas.' },
-        { id: 'ter-7', start: '14:30', end: '15:00', title: 'Deslocamento a pé para o Trabalho', cat: 'Deslocamento', desc: 'Saída às 14h30 para entrada pontual às 15h.' },
-        { id: 'ter-8', start: '15:00', end: '21:00', title: 'Trabalho (Turno Tarde/Noite)', cat: 'Trabalho', desc: 'Jornada integral das 15h às 21h.' },
-        { id: 'ter-9', start: '21:00', end: '21:25', title: 'Retorno para Casa a pé', cat: 'Deslocamento', desc: 'Caminhada de retorno para casa.' },
-        { id: 'ter-10', start: '21:30', end: '22:45', title: 'Banho e Janta', cat: 'Alimentação', desc: 'Jantar (segunda marmita já garantida), banho e descompressão.' },
-        { id: 'ter-11', start: '23:00', end: '00:30', title: 'Namorada (Visita + Ligação)', cat: 'Relacionamento', desc: 'Momento a dois e ligação do dia.' },
-        { id: 'ter-12', start: '00:45', end: '07:30', title: 'Sono Reparador', cat: 'Descanso', desc: 'Quase 7 horas completas de sono.' }
+        { id: 'ter-1', start: '07:30', end: '08:30', title: 'Acordar', cat: 'Pessoal', desc: 'Café da manhã.' },
+        { id: 'ter-2', start: '08:30', end: '10:00', title: 'Academia', cat: 'Saúde', desc: 'Ida a pé, 1h de treino e volta.' },
+        { id: 'ter-3', start: '10:00', end: '10:45', title: 'Banho', cat: 'Saúde', desc: 'Banho e lanche pós-treino.' },
+        { id: 'ter-4', start: '10:50', end: '11:30', title: 'Almoço', cat: 'Alimentação', desc: 'Pegar marmita e almoçar às 11h.', note: 'Almoço às 11h' },
+        { id: 'ter-5', start: '11:30', end: '13:00', title: 'Faculdade EAD', cat: 'Estudos', desc: 'Disciplinas teóricas.' },
+        { id: 'ter-6', start: '13:00', end: '14:15', title: 'Curso Prático', cat: 'Estudos', desc: 'Prática contábil e planilhas.' },
+        { id: 'ter-7', start: '14:30', end: '15:00', title: 'Deslocamento', cat: 'Deslocamento', desc: 'Caminhada para o trabalho.' },
+        { id: 'ter-8', start: '15:00', end: '21:00', title: 'Trabalho', cat: 'Trabalho', desc: 'Turno das 15h às 21h.' },
+        { id: 'ter-9', start: '21:00', end: '21:25', title: 'Deslocamento', cat: 'Deslocamento', desc: 'Volta para casa a pé.' },
+        { id: 'ter-10', start: '21:30', end: '22:45', title: 'Banho e Janta', cat: 'Alimentação', desc: 'Segunda marmita e descanso.' },
+        { id: 'ter-11', start: '23:00', end: '00:30', title: 'Namorada', cat: 'Relacionamento', desc: 'Visita e ligação.' },
+        { id: 'ter-12', start: '00:45', end: '07:30', title: 'Dormir', cat: 'Descanso', desc: 'Descanso noturno.' }
       ],
 
       // 3: Quarta-Feira
       3: [
-        { id: 'qua-1', start: '07:30', end: '08:30', title: 'Acordar, Hidratação e Café', cat: 'Pessoal', desc: 'Manhã livre e início de dia bem disposto.' },
-        { id: 'qua-2', start: '08:30', end: '10:00', title: 'Academia (Treino Matinal)', cat: 'Saúde', desc: 'Treino de 1 hora com deslocamento calmo.' },
-        { id: 'qua-3', start: '10:00', end: '10:45', title: 'Banho e Organização', cat: 'Pessoal', desc: 'Higiene e arrumação.' },
-        { id: 'qua-4', start: '10:50', end: '11:30', title: 'Almoço & Pegar Marmita', cat: 'Alimentação', desc: 'Busca rápida de marmita e refeição às 11h.', note: 'Almoço fixo às 11h' },
-        { id: 'qua-5', start: '11:30', end: '12:35', title: 'Estudos: Faculdade EAD', cat: 'Estudos', desc: '1h05 de revisão de disciplinas e exercícios acadêmicos.' },
-        { id: 'qua-6', start: '12:35', end: '13:00', title: 'Deslocamento para o Trabalho', cat: 'Deslocamento', desc: 'Caminhada para o trabalho com entrada às 13h.' },
-        { id: 'qua-7', start: '13:00', end: '18:00', title: 'Trabalho (Turno 1)', cat: 'Trabalho', desc: 'Primeiro período da tarde.' },
-        { id: 'qua-8', start: '18:00', end: '19:00', title: 'Pausa Jantar no Trabalho', cat: 'Alimentação', desc: '1 hora de intervalo de janta (2ª marmita).' },
-        { id: 'qua-9', start: '19:00', end: '21:00', title: 'Trabalho (Turno 2)', cat: 'Trabalho', desc: 'Segundo período até o encerramento às 21h.' },
-        { id: 'qua-10', start: '21:00', end: '21:25', title: 'Retorno para Casa a pé', cat: 'Deslocamento', desc: 'Caminhada de volta para casa.' },
-        { id: 'qua-11', start: '21:30', end: '22:45', title: 'Banho e Descanso Mental', cat: 'Pessoal', desc: 'Banho e relaxamento para desligar da jornada.' },
-        { id: 'qua-12', start: '23:00', end: '00:30', title: 'Namorada (Visita + Ligação)', cat: 'Relacionamento', desc: 'Conversa e conexão diária com a namorada.' },
-        { id: 'qua-13', start: '00:45', end: '07:30', title: 'Sono Reparador', cat: 'Descanso', desc: 'Descanso completo para o corpo.' }
+        { id: 'qua-1', start: '07:30', end: '08:30', title: 'Acordar', cat: 'Pessoal', desc: 'Café da manhã.' },
+        { id: 'qua-2', start: '08:30', end: '10:00', title: 'Academia', cat: 'Saúde', desc: 'Treino de 1 hora.' },
+        { id: 'qua-3', start: '10:00', end: '10:45', title: 'Banho', cat: 'Pessoal', desc: 'Banho e arrumação.' },
+        { id: 'qua-4', start: '10:50', end: '11:30', title: 'Almoço', cat: 'Alimentação', desc: 'Pegar marmita e almoçar às 11h.', note: 'Almoço às 11h' },
+        { id: 'qua-5', start: '11:30', end: '12:35', title: 'Faculdade EAD', cat: 'Estudos', desc: 'Revisão e tarefas da faculdade.' },
+        { id: 'qua-6', start: '12:35', end: '13:00', title: 'Deslocamento', cat: 'Deslocamento', desc: 'Caminhada para o trabalho.' },
+        { id: 'qua-7', start: '13:00', end: '18:00', title: 'Trabalho', cat: 'Trabalho', desc: 'Primeiro turno.' },
+        { id: 'qua-8', start: '18:00', end: '19:00', title: 'Janta', cat: 'Alimentação', desc: 'Pausa de janta no trabalho.' },
+        { id: 'qua-9', start: '19:00', end: '21:00', title: 'Trabalho', cat: 'Trabalho', desc: 'Segundo turno até 21h.' },
+        { id: 'qua-10', start: '21:00', end: '21:25', title: 'Deslocamento', cat: 'Deslocamento', desc: 'Volta para casa a pé.' },
+        { id: 'qua-11', start: '21:30', end: '22:45', title: 'Banho e Descanso', cat: 'Pessoal', desc: 'Banho e descompressão.' },
+        { id: 'qua-12', start: '23:00', end: '00:30', title: 'Namorada', cat: 'Relacionamento', desc: 'Visita e ligação.' },
+        { id: 'qua-13', start: '00:45', end: '07:30', title: 'Dormir', cat: 'Descanso', desc: 'Descanso noturno.' }
       ],
 
       // 4: Quinta-Feira
       4: [
-        { id: 'qui-1', start: '07:30', end: '08:30', title: 'Acordar e Café da Manhã', cat: 'Pessoal', desc: 'Despertar descansado e reforço matinal.' },
-        { id: 'qui-2', start: '08:30', end: '10:00', title: 'Academia (Treino Matinal)', cat: 'Saúde', desc: 'Treino de 1 hora de hipertrofia/saúde.' },
-        { id: 'qui-3', start: '10:00', end: '10:45', title: 'Banho e Preparação', cat: 'Pessoal', desc: 'Recuperação física e higiene.' },
-        { id: 'qui-4', start: '10:50', end: '11:30', title: 'Almoço & Pegar Marmita', cat: 'Alimentação', desc: 'Almoço pontual às 11h.', note: 'Almoço fixo às 11h' },
-        { id: 'qui-5', start: '11:30', end: '12:35', title: 'Estudos: Curso Prático Contábil', cat: 'Estudos', desc: '1h05 de exercícios contábeis e planilhas práticas.' },
-        { id: 'qui-6', start: '12:35', end: '13:00', title: 'Deslocamento para o Trabalho', cat: 'Deslocamento', desc: 'Saída às 12h35 para entrada às 13h.' },
-        { id: 'qui-7', start: '13:00', end: '18:00', title: 'Trabalho (Turno 1)', cat: 'Trabalho', desc: 'Expediente da tarde.' },
-        { id: 'qui-8', start: '18:00', end: '19:00', title: 'Pausa Jantar no Trabalho', cat: 'Alimentação', desc: 'Refeição noturna com a segunda marmita.' },
-        { id: 'qui-9', start: '19:00', end: '21:00', title: 'Trabalho (Turno 2)', cat: 'Trabalho', desc: 'Finalização do expediente de quinta.' },
-        { id: 'qui-10', start: '21:00', end: '21:25', title: 'Retorno para Casa a pé', cat: 'Deslocamento', desc: 'Caminhada de volta.' },
-        { id: 'qui-11', start: '21:30', end: '22:45', title: 'Banho e Descompressão', cat: 'Pessoal', desc: 'Relaxamento.' },
-        { id: 'qui-12', start: '23:00', end: '00:30', title: 'Namorada (Visita + Ligação)', cat: 'Relacionamento', desc: 'Visita e ligação diária.' },
-        { id: 'qui-13', start: '00:45', end: '07:00', title: 'Sono Reparador', cat: 'Descanso', desc: 'Sono reparador.' }
+        { id: 'qui-1', start: '07:30', end: '08:30', title: 'Acordar', cat: 'Pessoal', desc: 'Café da manhã.' },
+        { id: 'qui-2', start: '08:30', end: '10:00', title: 'Academia', cat: 'Saúde', desc: 'Treino de 1 hora.' },
+        { id: 'qui-3', start: '10:00', end: '10:45', title: 'Banho', cat: 'Pessoal', desc: 'Banho e preparação.' },
+        { id: 'qui-4', start: '10:50', end: '11:30', title: 'Almoço', cat: 'Alimentação', desc: 'Pegar marmita e almoçar às 11h.', note: 'Almoço às 11h' },
+        { id: 'qui-5', start: '11:30', end: '12:35', title: 'Curso Prático', cat: 'Estudos', desc: 'Exercícios práticos de contabilidade.' },
+        { id: 'qui-6', start: '12:35', end: '13:00', title: 'Deslocamento', cat: 'Deslocamento', desc: 'Caminhada para o trabalho.' },
+        { id: 'qui-7', start: '13:00', end: '18:00', title: 'Trabalho', cat: 'Trabalho', desc: 'Primeiro turno.' },
+        { id: 'qui-8', start: '18:00', end: '19:00', title: 'Janta', cat: 'Alimentação', desc: 'Pausa de janta no trabalho.' },
+        { id: 'qui-9', start: '19:00', end: '21:00', title: 'Trabalho', cat: 'Trabalho', desc: 'Segundo turno até 21h.' },
+        { id: 'qui-10', start: '21:00', end: '21:25', title: 'Deslocamento', cat: 'Deslocamento', desc: 'Volta para casa a pé.' },
+        { id: 'qui-11', start: '21:30', end: '22:45', title: 'Banho e Descanso', cat: 'Pessoal', desc: 'Banho e descompressão.' },
+        { id: 'qui-12', start: '23:00', end: '00:30', title: 'Namorada', cat: 'Relacionamento', desc: 'Visita e ligação.' },
+        { id: 'qui-13', start: '00:45', end: '07:00', title: 'Dormir', cat: 'Descanso', desc: 'Descanso noturno.' }
       ],
 
       // 5: Sexta-Feira
       5: [
-        { id: 'sex-1', start: '07:00', end: '07:35', title: 'Acordar, Café e Saída', cat: 'Pessoal', desc: 'Saída às 07h35 a pé para entrar às 08h.' },
-        { id: 'sex-2', start: '08:00', end: '11:00', title: 'Trabalho (Turno Manhã)', cat: 'Trabalho', desc: 'Primeiro bloco de trabalho da sexta-feira.' },
-        { id: 'sex-3', start: '11:00', end: '12:00', title: 'Almoço & Buscar Marmitas', cat: 'Alimentação', desc: 'Busca rápida de marmitas na prefeitura e refeição.', note: 'Almoço fixo às 11h' },
-        { id: 'sex-4', start: '12:00', end: '18:00', title: 'Trabalho (Turno Tarde)', cat: 'Trabalho', desc: 'Encerramento do expediente regular.' },
-        { id: 'sex-5', start: '18:15', end: '19:15', title: 'Academia (No Caminho para Casa)', cat: 'Saúde', desc: 'Treino de fechamento da semana saindo do trabalho.', note: 'A caminho de casa' },
-        { id: 'sex-6', start: '19:15', end: '19:35', title: 'Retorno para Casa', cat: 'Deslocamento', desc: 'Caminhada para casa.' },
-        { id: 'sex-7', start: '19:35', end: '20:30', title: 'Banho e Jantar', cat: 'Alimentação', desc: 'Banho pós-treino e refeição com tranquilidade.' },
-        { id: 'sex-8', start: '20:30', end: '22:00', title: 'Estudos: Faculdade EAD', cat: 'Estudos', desc: '1h30 de fechamento dos fóruns e prazos da semana acadêmica.' },
-        { id: 'sex-9', start: '22:00', end: '23:00', title: 'Descanso e Descompressão', cat: 'Pessoal', desc: 'Momento livre sem cobranças.' },
-        { id: 'sex-10', start: '23:00', end: '01:00', title: 'Namorada (Visita + Ligação Estendida)', cat: 'Relacionamento', desc: 'Visita e conversa de sexta sem pressa.' }
+        { id: 'sex-1', start: '07:00', end: '07:35', title: 'Acordar', cat: 'Pessoal', desc: 'Desjejum e saída às 07h35.' },
+        { id: 'sex-2', start: '08:00', end: '11:00', title: 'Trabalho', cat: 'Trabalho', desc: 'Turno da manhã.' },
+        { id: 'sex-3', start: '11:00', end: '12:00', title: 'Almoço', cat: 'Alimentação', desc: 'Pegar marmitas na prefeitura e almoçar.', note: 'Almoço às 11h' },
+        { id: 'sex-4', start: '12:00', end: '18:00', title: 'Trabalho', cat: 'Trabalho', desc: 'Turno da tarde.' },
+        { id: 'sex-5', start: '18:15', end: '19:15', title: 'Academia', cat: 'Saúde', desc: 'Treino de 1 hora na volta do trabalho.' },
+        { id: 'sex-6', start: '19:15', end: '19:35', title: 'Deslocamento', cat: 'Deslocamento', desc: 'Volta para casa a pé.' },
+        { id: 'sex-7', start: '19:35', end: '20:30', title: 'Banho e Janta', cat: 'Alimentação', desc: 'Banho e refeição da noite.' },
+        { id: 'sex-8', start: '20:30', end: '22:00', title: 'Faculdade EAD', cat: 'Estudos', desc: 'Fechamento semanal das disciplinas.' },
+        { id: 'sex-9', start: '22:00', end: '23:00', title: 'Descanso', cat: 'Pessoal', desc: 'Tempo livre.' },
+        { id: 'sex-10', start: '23:00', end: '01:00', title: 'Namorada', cat: 'Relacionamento', desc: 'Visita e conversa.' }
       ],
 
       // 6: Sábado
       6: [
-        { id: 'sab-1', start: '07:00', end: '07:35', title: 'Acordar, Café e Saída', cat: 'Pessoal', desc: 'Café da manhã e saída a pé às 07h35.' },
-        { id: 'sab-2', start: '08:00', end: '14:00', title: 'Trabalho (Expediente de Sábado)', cat: 'Trabalho', desc: 'Jornada contínua de 6 horas.' },
-        { id: 'sab-3', start: '14:00', end: '14:25', title: 'Retorno para Casa a pé', cat: 'Deslocamento', desc: 'Caminhada de volta do trabalho.' },
-        { id: 'sab-4', start: '14:30', end: '18:00', title: 'Faxina Geral da Casa (Bloco Único)', cat: 'Casa', desc: 'Limpeza completa e contínua direto ao chegar. Limpar tudo para deixar o lar em ordem!', note: 'Bloco de 3h30' },
-        { id: 'sab-5', start: '18:00', end: '19:00', title: 'Banho, Preparação e Saída', cat: 'Pessoal', desc: 'Banho pós-faxina, troca de roupa, preparação pessoal e deslocamento para a religião.', note: 'Início dos preparativos às 18h' },
-        { id: 'sab-6', start: '19:00', end: '22:00', title: 'Religião / Prática Espiritual', cat: 'Espiritualidade', desc: 'Compromisso religioso semanal com início pontual às 19h.', note: 'Compromisso fixo de sábado' },
-        { id: 'sab-7', start: '22:00', end: '23:59', title: 'Retorno, Janta e Descanso / Namorada', cat: 'Lazer', desc: 'Retorno para casa com tranquilidade, refeição, descompressão e contato com a namorada.' }
+        { id: 'sab-1', start: '07:00', end: '07:35', title: 'Acordar', cat: 'Pessoal', desc: 'Café da manhã e saída às 07h35.' },
+        { id: 'sab-2', start: '08:00', end: '14:00', title: 'Trabalho', cat: 'Trabalho', desc: 'Expediente das 08h às 14h.' },
+        { id: 'sab-3', start: '14:00', end: '14:25', title: 'Deslocamento', cat: 'Deslocamento', desc: 'Volta para casa a pé.' },
+        { id: 'sab-4', start: '14:30', end: '18:00', title: 'Faxina da Casa', cat: 'Casa', desc: 'Limpeza geral da casa.', note: 'Bloco de 3h30' },
+        { id: 'sab-5', start: '18:00', end: '19:00', title: 'Banho e Preparação', cat: 'Pessoal', desc: 'Banho, troca de roupa e saída para a religião.' },
+        { id: 'sab-6', start: '19:00', end: '22:00', title: 'Religião', cat: 'Espiritualidade', desc: 'Compromisso religioso semanal às 19h.' },
+        { id: 'sab-7', start: '22:00', end: '23:59', title: 'Retorno e Janta', cat: 'Lazer', desc: 'Volta para casa, refeição e namorada.' }
       ],
 
       // 0: Domingo
       0: [
-        { id: 'dom-1', start: '07:30', end: '08:00', title: 'Acordar Calmo, Água e Chá', cat: 'Pessoal', desc: 'Despertar tranquilo sem estresse.' },
-        { id: 'dom-2', start: '08:00', end: '08:50', title: 'Psicóloga (Sessão Quinzenal)', cat: 'Saúde Mental', desc: 'Atendimento e autocuidado mental quinzenal.' },
-        { id: 'dom-3', start: '08:50', end: '09:00', title: 'Transição e Respiração', cat: 'Pessoal', desc: '10 minutos de pausa e reflexão.' },
-        { id: 'dom-4', start: '09:00', end: '10:00', title: 'Espiritualidade (1h Sagrada e Inviolável)', cat: 'Espiritualidade', desc: 'Momento de oração, estudo espiritual e conexão interior sem nenhuma interrupção.', note: 'Inviolável' },
-        { id: 'dom-5', start: '10:00', end: '23:59', title: 'Dia 100% Livre: Descanso, Lazer & Namorada', cat: 'Lazer', desc: 'Casa já limpa do sábado, mente leve e recarga completa para a semana que se inicia.' }
+        { id: 'dom-1', start: '07:30', end: '08:00', title: 'Acordar', cat: 'Pessoal', desc: 'Despertar e café.' },
+        { id: 'dom-2', start: '08:00', end: '08:50', title: 'Psicóloga', cat: 'Saúde Mental', desc: 'Sessão quinzenal.' },
+        { id: 'dom-3', start: '09:00', end: '10:00', title: 'Espiritualidade', cat: 'Espiritualidade', desc: 'Momento de espiritualidade.' },
+        { id: 'dom-4', start: '10:00', end: '23:59', title: 'Descanso e Lazer', cat: 'Lazer', desc: 'Dia livre, namorada e descanso.' }
       ]
     };
 
