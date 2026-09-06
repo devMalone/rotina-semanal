@@ -452,19 +452,33 @@
        07. TIMELINE DE ATIVIDADES
        ========================================================================== */
     .timeline-title {
-      font-size: 1.1rem;
+      font-size: 0.92rem;
       font-weight: 700;
       color: var(--text-primary);
       margin-bottom: 0.85rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    #selectedDayTitle {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      letter-spacing: -0.01em;
     }
 
     .timeline-count {
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--text-muted);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
 
     .timeline {
