@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rotina Semanal — Painel de Produtividade & Bem-Estar</title>
+  <meta name="description" content="Organização e acompanhamento da rotina semanal personalizada: trabalho, estudos de Ciências Contábeis, treino físico, faxina e espiritualidade.">
+  
+  <!-- Preconnect Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+  <style>
+    /* ==========================================================================
+       00. RESET & BASE
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      font-size: 16px;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.5;
+      transition: background-color 0.25s ease, color 0.25s ease;
+      padding-bottom: 5rem;
+    }
+
+    /* ==========================================================================
+       01. VARIÁVEIS (CSS Custom Properties / Design Tokens)
+       ========================================================================== */
+    :root[data-theme="dark"] {
+      --bg-primary: #0C0D0E;
+      --bg-secondary: #141618;
+      --bg-tertiary: #1D2024;
+      --bg-card: rgba(23, 26, 30, 0.85);
+      --bg-card-hover: rgba(30, 34, 40, 0.95);
+      
+      --text-primary: #F4F5F7;
+      --text-secondary: #9AA2AC;
+      --text-muted: #646D78;
+      
+      --accent: #3B82F6;
+      --accent-soft: rgba(59, 130, 246, 0.14);
+      --accent-glow: rgba(59, 130, 246, 0.25);
+      
+      --border: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.16);
+      
+      --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+      --shadow-lg: 0 16px 36px rgba(0, 0, 0, 0.6);
+      
+      /* Cores de Categoria */
+      --cat-trabalho: #3B82F6;
+      --cat-estudos: #8B5CF6;
+      --cat-saude: #10B981;
+      --cat-alimentacao: #F59E0B;
+      --cat-casa: #EC4899;
+      --cat-espiritualidade: #EAB308;
+      --cat-pessoal: #6366F1;
+      --cat-lazer: #14B8A6;
+    }
+
+    :root[data-theme="light"] {
+      --bg-primary: #F8FAFC;
+      --bg-secondary: #F1F5F9;
+      --bg-tertiary: #E2E8F0;
+      --bg-card: rgba(255, 255, 255, 0.95);
+      --bg-card-hover: #FFFFFF;
+      
+      --text-primary: #0F172A;
+      --text-secondary: #475569;
+      --text-muted: #94A3B8;
+      
+      --accent: #2563EB;
+      --accent-soft: rgba(37, 99, 235, 0.08);
+      --accent-glow: rgba(37, 99, 235, 0.18);
+      
+      --border: rgba(15, 23, 42, 0.08);
+      --border-strong: rgba(15, 23, 42, 0.16);
+      
+      --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.04);
+      --shadow-md: 0 8px 20px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.08);
+      
+      /* Cores de Categoria */
+      --cat-trabalho: #2563EB;
+      --cat-estudos: #7C3AED;
+      --cat-saude: #059669;
+      --cat-alimentacao: #D97706;
+      --cat-casa: #DB2777;
+      --cat-espiritualidade: #CA8A04;
+      --cat-pessoal: #4F46E5;
+      --cat-lazer: #0D9488;
+    }
+
+    /* ==========================================================================
+       02. TIPOGRAFIA & HIERARQUIA
+       ========================================================================== */
+    h1, h2, h3, .font-heading {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    /* ==========================================================================
+       03. COMPONENTES GLOBAIS
+       ========================================================================== */
+    .container {
+      width: 100%;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 1.25rem 1rem;
+    }
+
+    .icon {
+      width: 1.125rem;
+      height: 1.125rem;
+      stroke-width: 2;
+      display: inline-block;
+      vertical-align: middle;
+      flex-shrink: 0;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.25rem 0.65rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .btn-action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.65rem 1.1rem;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      transition: all 0.2s ease;
+      min-height: 44px;
+    }
+
+    .btn-action:hover {
+      background: var(--bg-tertiary);
+      border-color: var(--border-strong);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #FFFFFF;
+      border-color: var(--accent);
+    }
+
+    .btn-primary:hover {
+      opacity: 0.92;
+      box-shadow: 0 0 16px var(--accent-glow);
+    }
+
+    /* ==========================================================================
+       04. TOPBAR & CABEÇALHO
+       ========================================================================== */
+    .header {
+      background: var(--bg-secondary);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem 1rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .brand-title {
+      font-size: 1.125rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-primary);
+    }
+
+    .brand-title span {
+      color: var(--accent);
+      font-weight: 500;
+      font-size: 0.875rem;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .theme-toggle-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    /* ==========================================================================
+       05. LIVE ACTIVITY CARD (O QUE FAZER AGORA)
+       ========================================================================== */
+    .live-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .live-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--accent);
+    }
+
+    .live-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 0.75rem;
+    }
+
+    .live-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 0 var(--accent-glow);
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+      }
+      70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 8px rgba(59, 130, 246, 0);
+      }
+      100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+      }
+    }
+
+    .live-time {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .live-title {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.35rem;
+    }
+
+    .live-desc {
+      font-size: 0.925rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.85rem;
+    }
+
+    .live-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .live-meta-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    /* ==========================================================================
+       06. SELETOR DE DIAS & FILTROS
+       ========================================================================== */
+    .days-nav {
+      display: flex;
+      gap: 0.4rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1rem;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .days-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    .day-btn {
+      flex: 1;
+      min-width: 80px;
+      padding: 0.6rem 0.5rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-secondary);
+      color: var(--text-secondary);
+      font-size: 0.825rem;
+      font-weight: 600;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.2rem;
+    }
+
+    .day-btn .day-short {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    .day-btn .day-name {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .day-btn:hover {
+      background: var(--bg-tertiary);
+      border-color: var(--border-strong);
+    }
+
+    .day-btn.active {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .day-btn.active .day-short,
+    .day-btn.active .day-name {
+      color: var(--accent);
+    }
+
+    .category-filter {
+      display: flex;
+      gap: 0.4rem;
+      overflow-x: auto;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.25rem;
+      scrollbar-width: none;
+    }
+
+    .category-filter::-webkit-scrollbar {
+      display: none;
+    }
+
+    .cat-btn {
+      padding: 0.35rem 0.75rem;
+      border-radius: 9999px;
+      border: 1px solid var(--border);
+      background: var(--bg-secondary);
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .cat-btn.active {
+      background: var(--text-primary);
+      color: var(--bg-primary);
+      border-color: var(--text-primary);
+    }
+
+    /* ==========================================================================
+       07. TIMELINE DE ATIVIDADES
+       ========================================================================== */
+    .timeline-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .timeline-count {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .activity-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.15rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      transition: all 0.2s ease;
+      position: relative;
+    }
+
+    .activity-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--border-strong);
+      transform: translateY(-1px);
+    }
+
+    .activity-card.is-current {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      box-shadow: 0 0 16px var(--accent-glow);
+    }
+
+    .activity-check {
+      margin-top: 0.25rem;
+      width: 20px;
+      height: 20px;
+      border-radius: 5px;
+      border: 1.5px solid var(--border-strong);
+      background: var(--bg-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+
+    .activity-check input {
+      display: none;
+    }
+
+    .activity-check .check-icon {
+      width: 14px;
+      height: 14px;
+      color: transparent;
+      transition: color 0.15s ease;
+    }
+
+    .activity-card.completed {
+      opacity: 0.55;
+    }
+
+    .activity-card.completed .activity-title {
+      text-decoration: line-through;
+    }
+
+    .activity-card.completed .activity-check {
+      background: var(--cat-saude);
+      border-color: var(--cat-saude);
+    }
+
+    .activity-card.completed .check-icon {
+      color: #FFFFFF;
+    }
+
+    .activity-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .activity-time-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .activity-time {
+      font-size: 0.825rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .activity-duration {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .activity-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.25rem;
+    }
+
+    .activity-desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.4;
+    }
+
+    .activity-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.775rem;
+      color: var(--text-muted);
+      margin-top: 0.4rem;
+      background: var(--bg-secondary);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+    }
+
+    /* ==========================================================================
+       08. RESUMO & ESTATÍSTICAS DA SEMANA
+       ========================================================================== */
+    .stats-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      margin-top: 1.5rem;
+    }
+
+    .stats-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .stat-box {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .stat-val {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      font-family: 'Space Grotesk', sans-serif;
+    }
+
+    /* ==========================================================================
+       09. BANNER INFORMATIVO / ATALHO MOBILE
+       ========================================================================== */
+    .mobile-tip {
+      background: var(--accent-soft);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.85rem 1rem;
+      margin-top: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.825rem;
+      color: var(--text-secondary);
+    }
+
+    .mobile-tip .tip-icon {
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* ==========================================================================
+       10. PREFERÊNCIAS DO SISTEMA
+       ========================================================================== */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOPBAR NAVEGAÇÃO -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="brand-title">
+        <i data-lucide="calendar-clock" class="icon" style="color: var(--accent);"></i>
+        Rotina Semanal
+        <span>✦ Painel Pessoal</span>
+      </div>
+      <div class="header-actions">
+        <button id="themeToggle" class="theme-toggle-btn" title="Alternar Modo Claro/Escuro" aria-label="Alternar Tema">
+          <i data-lucide="sun" id="themeIcon" class="icon"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- LIVE TRACKER (O QUE FAZER AGORA) -->
+    <section class="live-card" id="liveSection">
+      <div class="live-header">
+        <div class="live-indicator">
+          <div class="pulse-dot"></div>
+          O Que Fazer Agora
+        </div>
+        <div class="live-time" id="currentTimeDisplay">--:--</div>
+      </div>
+      <h2 class="live-title" id="liveActivityTitle">Carregando rotina...</h2>
+      <p class="live-desc" id="liveActivityDesc">Identificando atividade programada para este horário.</p>
+      <div class="live-meta">
+        <div class="live-meta-item">
+          <i data-lucide="clock" class="icon"></i>
+          <span id="liveTimeWindow">--:-- até --:--</span>
+        </div>
+        <div class="live-meta-item">
+          <i data-lucide="tag" class="icon"></i>
+          <span id="liveCategory">Geral</span>
+        </div>
+        <div class="live-meta-item">
+          <i data-lucide="fast-forward" class="icon"></i>
+          <span id="liveNextActivity">Próxima: Carregando...</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- NAVEGAÇÃO DE DIAS -->
+    <nav class="days-nav" id="daysNav" aria-label="Dias da Semana">
+      <button class="day-btn" data-day="1">
+        <span class="day-short">Seg</span>
+        <span class="day-name">Segunda</span>
+      </button>
+      <button class="day-btn" data-day="2">
+        <span class="day-short">Ter</span>
+        <span class="day-name">Terça</span>
+      </button>
+      <button class="day-btn" data-day="3">
+        <span class="day-short">Qua</span>
+        <span class="day-name">Quarta</span>
+      </button>
+      <button class="day-btn" data-day="4">
+        <span class="day-short">Qui</span>
+        <span class="day-name">Quinta</span>
+      </button>
+      <button class="day-btn" data-day="5">
+        <span class="day-short">Sex</span>
+        <span class="day-name">Sexta</span>
+      </button>
+      <button class="day-btn" data-day="6">
+        <span class="day-short">Sáb</span>
+        <span class="day-name">Sábado</span>
+      </button>
+      <button class="day-btn" data-day="0">
+        <span class="day-short">Dom</span>
+        <span class="day-name">Domingo</span>
+      </button>
+    </nav>
+
+    <!-- FILTRO DE CATEGORIAS -->
+    <div class="category-filter" id="categoryFilter">
+      <button class="cat-btn active" data-cat="all">Todos</button>
+      <button class="cat-btn" data-cat="Trabalho">Trabalho</button>
+      <button class="cat-btn" data-cat="Estudos">Estudos</button>
+      <button class="cat-btn" data-cat="Saúde">Academia</button>
+      <button class="cat-btn" data-cat="Casa">Casa & Faxina</button>
+      <button class="cat-btn" data-cat="Espiritualidade">Espiritualidade</button>
+      <button class="cat-btn" data-cat="Relacionamento">Namorada</button>
+    </div>
+
+    <!-- LISTA DE ATIVIDADES DO DIA -->
+    <section>
+      <div class="timeline-title">
+        <span id="selectedDayTitle">Cronograma de Hoje</span>
+        <span class="timeline-count" id="taskCount">0 atividades</span>
+      </div>
+      
+      <div class="timeline" id="timelineList">
+        <!-- Renderizado dinamicamente via JS -->
+      </div>
+    </section>
+
+    <!-- ESTATÍSTICAS / BALANÇO SEMANAL -->
+    <section class="stats-card">
+      <div class="stats-title">
+        <i data-lucide="pie-chart" class="icon" style="color: var(--accent);"></i>
+        Balanço Semanal de Horas Dedicadas
+      </div>
+      <div class="stats-grid">
+        <div class="stat-box">
+          <span class="stat-label">Faculdade EAD</span>
+          <span class="stat-val">6h 00m</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">Curso Prático</span>
+          <span class="stat-val">2h 15m</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">Academia</span>
+          <span class="stat-val">5 treinos</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">Faxina Geral</span>
+          <span class="stat-val">3h 30m</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">Espiritualidade</span>
+          <span class="stat-val">1h 00m</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-label">Sono Médio</span>
+          <span class="stat-val">~7h/noite</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- DICA DE FIXAR NA TELA INICIAL (PWA / SHORTCUT) -->
+    <div class="mobile-tip">
+      <i data-lucide="smartphone" class="icon tip-icon"></i>
+      <div>
+        <strong>Como fixar no celular:</strong> No Chrome do celular, toque nos 3 pontinhos e escolha <em>"Adicionar à tela inicial"</em> para abrir como aplicativo a qualquer momento.
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    /* ==========================================================================
+       DADOS DA ROTINA (SEGUNDA A DOMINGO)
+       ========================================================================== */
+    const ROUTINE_DATA = {
+      // 1: Segunda-Feira
+      1: [
+        { id: 'seg-1', start: '07:00', end: '07:35', title: 'Acordar, Higiene e Café', cat: 'Pessoal', desc: 'Desjejum, higiene matinal e saída a pé para o trabalho às 07h35.', note: 'Deslocamento a pé (25 min)' },
+        { id: 'seg-2', start: '08:00', end: '11:00', title: 'Trabalho (Turno Manhã)', cat: 'Trabalho', desc: 'Primeiro bloco do expediente de segunda-feira.' },
+        { id: 'seg-3', start: '11:00', end: '12:00', title: 'Almoço & Buscar Marmitas', cat: 'Alimentação', desc: 'Passa em casa pegar kit, busca as duas marmitas na prefeitura e almoça no trabalho.', note: 'Almoço fixo às 11h' },
+        { id: 'seg-4', start: '12:00', end: '18:00', title: 'Trabalho (Turno Tarde)', cat: 'Trabalho', desc: 'Segundo bloco do expediente de trabalho.' },
+        { id: 'seg-5', start: '18:15', end: '19:15', title: 'Academia (No Caminho de Casa)', cat: 'Saúde', desc: 'Treino de 1 hora aproveitando o trajeto de retorno do trabalho.', note: 'A caminho de casa' },
+        { id: 'seg-6', start: '19:15', end: '19:35', title: 'Deslocamento para Casa', cat: 'Deslocamento', desc: 'Caminhada tranquila da academia até em casa.' },
+        { id: 'seg-7', start: '19:35', end: '20:30', title: 'Banho, Janta e Descanso', cat: 'Pessoal', desc: 'Banho relaxante pós-treino, jantar e descompressão.' },
+        { id: 'seg-8', start: '20:30', end: '22:30', title: 'Estudos: Faculdade EAD', cat: 'Estudos', desc: 'Ciências Contábeis: 2 horas de leitura teórica, módulos e conceitos densos.' },
+        { id: 'seg-9', start: '22:30', end: '23:00', title: 'Organização Pessoal', cat: 'Pessoal', desc: 'Ajuste de materiais e preparação para o momento com a namorada.' },
+        { id: 'seg-10', start: '23:00', end: '00:30', title: 'Namorada (Visita + Ligação)', cat: 'Relacionamento', desc: 'Visita rápida de 10 min + ligação do casal antes de dormir.' },
+        { id: 'seg-11', start: '00:45', end: '07:00', title: 'Sono Reparador', cat: 'Descanso', desc: 'Janela de sono de 6h15 com foco em descanso profundo.' }
+      ],
+
+      // 2: Terça-Feira
+      2: [
+        { id: 'ter-1', start: '07:30', end: '08:30', title: 'Acordar e Café com Calma', cat: 'Pessoal', desc: 'Acordar tranquilo garantindo 7h de sono reparador e café da manhã.' },
+        { id: 'ter-2', start: '08:30', end: '10:00', title: 'Academia (Treino Matinal)', cat: 'Saúde', desc: 'Ida a pé + 1 hora de treino com foco + volta sem correria.', note: 'Manhã livre' },
+        { id: 'ter-3', start: '10:00', end: '10:45', title: 'Banho e Lanche Pós-Treino', cat: 'Saúde', desc: 'Higiene e recuperação muscular.' },
+        { id: 'ter-4', start: '10:50', end: '11:30', title: 'Almoço & Pegar Marmita', cat: 'Alimentação', desc: 'Pega a marmita rapidamente (10 min) e almoça às 11h.', note: 'Almoço fixo às 11h' },
+        { id: 'ter-5', start: '11:30', end: '13:00', title: 'Estudos: Faculdade EAD', cat: 'Estudos', desc: '1h30 de dedicação a textos, videoaulas e matérias conceituais.' },
+        { id: 'ter-6', start: '13:00', end: '14:15', title: 'Estudos: Curso Prático Contábil', cat: 'Estudos', desc: '1h15 focado em exercícios práticos e ferramentas de mercado para vagas.' },
+        { id: 'ter-7', start: '14:30', end: '15:00', title: 'Deslocamento a pé para o Trabalho', cat: 'Deslocamento', desc: 'Saída às 14h30 para entrada pontual às 15h.' },
+        { id: 'ter-8', start: '15:00', end: '21:00', title: 'Trabalho (Turno Tarde/Noite)', cat: 'Trabalho', desc: 'Jornada integral das 15h às 21h.' },
+        { id: 'ter-9', start: '21:00', end: '21:25', title: 'Retorno para Casa a pé', cat: 'Deslocamento', desc: 'Caminhada de retorno para casa.' },
+        { id: 'ter-10', start: '21:30', end: '22:45', title: 'Banho e Janta', cat: 'Alimentação', desc: 'Jantar (segunda marmita já garantida), banho e descompressão.' },
+        { id: 'ter-11', start: '23:00', end: '00:30', title: 'Namorada (Visita + Ligação)', cat: 'Relacionamento', desc: 'Momento a dois e ligação do dia.' },
+        { id: 'ter-12', start: '00:45', end: '07:30', title: 'Sono Reparador', cat: 'Descanso', desc: 'Quase 7 horas completas de sono.' }
+      ],
+
+      // 3: Quarta-Feira
+      3: [
+        { id: 'qua-1', start: '07:30', end: '08:30', title: 'Acordar, Hidratação e Café', cat: 'Pessoal', desc: 'Manhã livre e início de dia bem disposto.' },
+        { id: 'qua-2', start: '08:30', end: '10:00', title: 'Academia (Treino Matinal)', cat: 'Saúde', desc: 'Treino de 1 hora com deslocamento calmo.' },
+        { id: 'qua-3', start: '10:00', end: '10:45', title: 'Banho e Organização', cat: 'Pessoal', desc: 'Higiene e arrumação.' },
+        { id: 'qua-4', start: '10:50', end: '11:30', title: 'Almoço & Pegar Marmita', cat: 'Alimentação', desc: 'Busca rápida de marmita e refeição às 11h.', note: 'Almoço fixo às 11h' },
+        { id: 'qua-5', start: '11:30', end: '12:35', title: 'Estudos: Faculdade EAD', cat: 'Estudos', desc: '1h05 de revisão de disciplinas e exercícios acadêmicos.' },
+        { id: 'qua-6', start: '12:35', end: '13:00', title: 'Deslocamento para o Trabalho', cat: 'Deslocamento', desc: 'Caminhada para o trabalho com entrada às 13h.' },
+        { id: 'qua-7', start: '13:00', end: '18:00', title: 'Trabalho (Turno 1)', cat: 'Trabalho', desc: 'Primeiro período da tarde.' },
+        { id: 'qua-8', start: '18:00', end: '19:00', title: 'Pausa Jantar no Trabalho', cat: 'Alimentação', desc: '1 hora de intervalo de janta (2ª marmita).' },
+        { id: 'qua-9', start: '19:00', end: '21:00', title: 'Trabalho (Turno 2)', cat: 'Trabalho', desc: 'Segundo período até o encerramento às 21h.' },
+        { id: 'qua-10', start: '21:00', end: '21:25', title: 'Retorno para Casa a pé', cat: 'Deslocamento', desc: 'Caminhada de volta para casa.' },
+        { id: 'qua-11', start: '21:30', end: '22:45', title: 'Banho e Descanso Mental', cat: 'Pessoal', desc: 'Banho e relaxamento para desligar da jornada.' },
+        { id: 'qua-12', start: '23:00', end: '00:30', title: 'Namorada (Visita + Ligação)', cat: 'Relacionamento', desc: 'Conversa e conexão diária com a namorada.' },
+        { id: 'qua-13', start: '00:45', end: '07:30', title: 'Sono Reparador', cat: 'Descanso', desc: 'Descanso completo para o corpo.' }
+      ],
+
+      // 4: Quinta-Feira
+      4: [
+        { id: 'qui-1', start: '07:30', end: '08:30', title: 'Acordar e Café da Manhã', cat: 'Pessoal', desc: 'Despertar descansado e reforço matinal.' },
+        { id: 'qui-2', start: '08:30', end: '10:00', title: 'Academia (Treino Matinal)', cat: 'Saúde', desc: 'Treino de 1 hora de hipertrofia/saúde.' },
+        { id: 'qui-3', start: '10:00', end: '10:45', title: 'Banho e Preparação', cat: 'Pessoal', desc: 'Recuperação física e higiene.' },
+        { id: 'qui-4', start: '10:50', end: '11:30', title: 'Almoço & Pegar Marmita', cat: 'Alimentação', desc: 'Almoço pontual às 11h.', note: 'Almoço fixo às 11h' },
+        { id: 'qui-5', start: '11:30', end: '12:35', title: 'Estudos: Curso Prático Contábil', cat: 'Estudos', desc: '1h05 de exercícios contábeis e planilhas práticas.' },
+        { id: 'qui-6', start: '12:35', end: '13:00', title: 'Deslocamento para o Trabalho', cat: 'Deslocamento', desc: 'Saída às 12h35 para entrada às 13h.' },
+        { id: 'qui-7', start: '13:00', end: '18:00', title: 'Trabalho (Turno 1)', cat: 'Trabalho', desc: 'Expediente da tarde.' },
+        { id: 'qui-8', start: '18:00', end: '19:00', title: 'Pausa Jantar no Trabalho', cat: 'Alimentação', desc: 'Refeição noturna com a segunda marmita.' },
+        { id: 'qui-9', start: '19:00', end: '21:00', title: 'Trabalho (Turno 2)', cat: 'Trabalho', desc: 'Finalização do expediente de quinta.' },
+        { id: 'qui-10', start: '21:00', end: '21:25', title: 'Retorno para Casa a pé', cat: 'Deslocamento', desc: 'Caminhada de volta.' },
+        { id: 'qui-11', start: '21:30', end: '22:45', title: 'Banho e Descompressão', cat: 'Pessoal', desc: 'Relaxamento.' },
+        { id: 'qui-12', start: '23:00', end: '00:30', title: 'Namorada (Visita + Ligação)', cat: 'Relacionamento', desc: 'Visita e ligação diária.' },
+        { id: 'qui-13', start: '00:45', end: '07:00', title: 'Sono Reparador', cat: 'Descanso', desc: 'Sono reparador.' }
+      ],
+
+      // 5: Sexta-Feira
+      5: [
+        { id: 'sex-1', start: '07:00', end: '07:35', title: 'Acordar, Café e Saída', cat: 'Pessoal', desc: 'Saída às 07h35 a pé para entrar às 08h.' },
+        { id: 'sex-2', start: '08:00', end: '11:00', title: 'Trabalho (Turno Manhã)', cat: 'Trabalho', desc: 'Primeiro bloco de trabalho da sexta-feira.' },
+        { id: 'sex-3', start: '11:00', end: '12:00', title: 'Almoço & Buscar Marmitas', cat: 'Alimentação', desc: 'Busca rápida de marmitas na prefeitura e refeição.', note: 'Almoço fixo às 11h' },
+        { id: 'sex-4', start: '12:00', end: '18:00', title: 'Trabalho (Turno Tarde)', cat: 'Trabalho', desc: 'Encerramento do expediente regular.' },
+        { id: 'sex-5', start: '18:15', end: '19:15', title: 'Academia (No Caminho para Casa)', cat: 'Saúde', desc: 'Treino de fechamento da semana saindo do trabalho.', note: 'A caminho de casa' },
+        { id: 'sex-6', start: '19:15', end: '19:35', title: 'Retorno para Casa', cat: 'Deslocamento', desc: 'Caminhada para casa.' },
+        { id: 'sex-7', start: '19:35', end: '20:30', title: 'Banho e Jantar', cat: 'Alimentação', desc: 'Banho pós-treino e refeição com tranquilidade.' },
+        { id: 'sex-8', start: '20:30', end: '22:00', title: 'Estudos: Faculdade EAD', cat: 'Estudos', desc: '1h30 de fechamento dos fóruns e prazos da semana acadêmica.' },
+        { id: 'sex-9', start: '22:00', end: '23:00', title: 'Descanso e Descompressão', cat: 'Pessoal', desc: 'Momento livre sem cobranças.' },
+        { id: 'sex-10', start: '23:00', end: '01:00', title: 'Namorada (Visita + Ligação Estendida)', cat: 'Relacionamento', desc: 'Visita e conversa de sexta sem pressa.' }
+      ],
+
+      // 6: Sábado
+      6: [
+        { id: 'sab-1', start: '07:00', end: '07:35', title: 'Acordar, Café e Saída', cat: 'Pessoal', desc: 'Café da manhã e saída a pé às 07h35.' },
+        { id: 'sab-2', start: '08:00', end: '14:00', title: 'Trabalho (Expediente de Sábado)', cat: 'Trabalho', desc: 'Jornada contínua de 6 horas.' },
+        { id: 'sab-3', start: '14:00', end: '14:25', title: 'Retorno para Casa a pé', cat: 'Deslocamento', desc: 'Caminhada de volta do trabalho.' },
+        { id: 'sab-4', start: '14:30', end: '18:00', title: 'Faxina Geral da Casa (Bloco Único)', cat: 'Casa', desc: 'Limpeza completa e contínua direto ao chegar. Limpar tudo para liberar o restante do fim de semana!', note: 'Bloco de 3h30' },
+        { id: 'sab-5', start: '18:00', end: '23:59', title: 'Casa da Mãe, Lazer & Namorada', cat: 'Lazer', desc: 'Banho merecido com casa limpa, ida para a casa da mãe (almoço/janta lá) e noite 100% livre!' }
+      ],
+
+      // 0: Domingo
+      0: [
+        { id: 'dom-1', start: '07:30', end: '08:00', title: 'Acordar Calmo, Água e Chá', cat: 'Pessoal', desc: 'Despertar tranquilo sem estresse.' },
+        { id: 'dom-2', start: '08:00', end: '08:50', title: 'Psicóloga (Sessão Quinzenal)', cat: 'Saúde Mental', desc: 'Atendimento e autocuidado mental quinzenal.' },
+        { id: 'dom-3', start: '08:50', end: '09:00', title: 'Transição e Respiração', cat: 'Pessoal', desc: '10 minutos de pausa e reflexão.' },
+        { id: 'dom-4', start: '09:00', end: '10:00', title: 'Espiritualidade (1h Sagrada e Inviolável)', cat: 'Espiritualidade', desc: 'Momento de oração, estudo espiritual e conexão interior sem nenhuma interrupção.', note: 'Inviolável' },
+        { id: 'dom-5', start: '10:00', end: '23:59', title: 'Dia 100% Livre: Descanso, Lazer & Namorada', cat: 'Lazer', desc: 'Casa já limpa do sábado, mente leve e recarga completa para a semana que se inicia.' }
+      ]
+    };
+
+    /* ==========================================================================
+       ESTADO DA APLICAÇÃO
+       ========================================================================== */
+    let selectedDay = new Date().getDay(); // Dia atual como padrão
+    let currentCategory = 'all';
+    let completedTasks = JSON.parse(localStorage.getItem('antigravity_completed_tasks') || '{}');
+
+    /* ==========================================================================
+       INICIALIZAÇÃO E EVENTOS
+       ========================================================================== */
+    document.addEventListener('DOMContentLoaded', () => {
+      initTheme();
+      renderDaysNav();
+      setupCategoryFilter();
+      updateLiveTracker();
+      renderTimeline();
+      
+      // Atualiza relógio e live card a cada 30 segundos
+      setInterval(updateLiveTracker, 30000);
+      
+      // Atualiza os ícones do Lucide
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    });
+
+    /* ==========================================================================
+       TEMA ESCURO / CLARO
+       ========================================================================== */
+    function initTheme() {
+      const savedTheme = localStorage.getItem('antigravity_theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      updateThemeIcon(savedTheme);
+
+      document.getElementById('themeToggle').addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem('antigravity_theme', next);
+        updateThemeIcon(next);
+      });
+    }
+
+    function updateThemeIcon(theme) {
+      const iconEl = document.getElementById('themeIcon');
+      if (iconEl) {
+        iconEl.setAttribute('data-lucide', theme === 'dark' ? 'sun' : 'moon');
+        if (window.lucide) lucide.createIcons();
+      }
+    }
+
+    /* ==========================================================================
+       SELETOR DE DIAS
+       ========================================================================== */
+    function renderDaysNav() {
+      const buttons = document.querySelectorAll('.day-btn');
+      buttons.forEach(btn => {
+        const day = parseInt(btn.getAttribute('data-day'), 10);
+        if (day === selectedDay) {
+          btn.classList.add('active');
+        } else {
+          btn.classList.remove('active');
+        }
+
+        btn.addEventListener('click', () => {
+          selectedDay = day;
+          buttons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          renderTimeline();
+        });
+      });
+    }
+
+    /* ==========================================================================
+       FILTRO DE CATEGORIA
+       ========================================================================== */
+    function setupCategoryFilter() {
+      const buttons = document.querySelectorAll('.cat-btn');
+      buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          buttons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentCategory = btn.getAttribute('data-cat');
+          renderTimeline();
+        });
+      });
+    }
+
+    /* ==========================================================================
+       MOTOR DO "O QUE FAZER AGORA" (LIVE TRACKER)
+       ========================================================================== */
+    function updateLiveTracker() {
+      const now = new Date();
+      const currentDay = now.getDay();
+      const currentHours = String(now.getHours()).padStart(2, '0');
+      const currentMinutes = String(now.getMinutes()).padStart(2, '0');
+      const currentTimeStr = `${currentHours}:${currentMinutes}`;
+
+      document.getElementById('currentTimeDisplay').textContent = `${currentTimeStr} • Horário Local`;
+
+      const todaysTasks = ROUTINE_DATA[currentDay] || [];
+      let currentTask = null;
+      let nextTask = null;
+
+      for (let i = 0; i < todaysTasks.length; i++) {
+        const task = todaysTasks[i];
+        if (currentTimeStr >= task.start && currentTimeStr < task.end) {
+          currentTask = task;
+          nextTask = todaysTasks[i + 1] || null;
+          break;
+        } else if (currentTimeStr < task.start && !nextTask) {
+          nextTask = task;
+        }
+      }
+
+      if (currentTask) {
+        document.getElementById('liveActivityTitle').textContent = currentTask.title;
+        document.getElementById('liveActivityDesc').textContent = currentTask.desc;
+        document.getElementById('liveTimeWindow').textContent = `${currentTask.start} às ${currentTask.end}`;
+        document.getElementById('liveCategory').textContent = currentTask.cat;
+        document.getElementById('liveNextActivity').textContent = nextTask ? `Próxima: ${nextTask.title} (${nextTask.start})` : 'Fim do cronograma de hoje';
+      } else {
+        document.getElementById('liveActivityTitle').textContent = 'Momento Livre / Intervalo';
+        document.getElementById('liveActivityDesc').textContent = 'Nenhuma atividade obrigatória em andamento neste instante.';
+        document.getElementById('liveTimeWindow').textContent = 'Descanso / Livre';
+        document.getElementById('liveCategory').textContent = 'Pessoal';
+        document.getElementById('liveNextActivity').textContent = nextTask ? `Próxima: ${nextTask.title} às ${nextTask.start}` : 'Descanso';
+      }
+    }
+
+    /* ==========================================================================
+       RENDERIZADOR DA TIMELINE DE ATIVIDADES
+       ========================================================================== */
+    function renderTimeline() {
+      const dayNames = ['Domingo', 'Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sábado'];
+      document.getElementById('selectedDayTitle').textContent = `Cronograma de ${dayNames[selectedDay]}`;
+
+      const tasks = ROUTINE_DATA[selectedDay] || [];
+      const filtered = tasks.filter(t => currentCategory === 'all' || t.cat.toLowerCase().includes(currentCategory.toLowerCase()));
+      
+      document.getElementById('taskCount').textContent = `${filtered.length} atividades`;
+
+      const listContainer = document.getElementById('timelineList');
+      listContainer.innerHTML = '';
+
+      const now = new Date();
+      const currentDay = now.getDay();
+      const currentHours = String(now.getHours()).padStart(2, '0');
+      const currentMinutes = String(now.getMinutes()).padStart(2, '0');
+      const currentTimeStr = `${currentHours}:${currentMinutes}`;
+
+      filtered.forEach(task => {
+        const isCurrent = (currentDay === selectedDay && currentTimeStr >= task.start && currentTimeStr < task.end);
+        const isCompleted = !!completedTasks[task.id];
+
+        const card = document.createElement('div');
+        card.className = `activity-card ${isCurrent ? 'is-current' : ''} ${isCompleted ? 'completed' : ''}`;
+        card.id = `card-${task.id}`;
+
+        card.innerHTML = `
+          <div class="activity-check" onclick="toggleTaskCompletion('${task.id}')">
+            <i data-lucide="check" class="check-icon"></i>
+          </div>
+          <div class="activity-content">
+            <div class="activity-time-row">
+              <span class="activity-time">${task.start} – ${task.end}</span>
+              <span class="badge" style="background: var(--bg-tertiary); color: var(--text-secondary); border: 1px solid var(--border);">
+                ${task.cat}
+              </span>
+              ${isCurrent ? '<span class="badge" style="background: var(--accent); color: #fff;">Agora</span>' : ''}
+            </div>
+            <h3 class="activity-title">${task.title}</h3>
+            <p class="activity-desc">${task.desc}</p>
+            ${task.note ? `
+              <div class="activity-note">
+                <i data-lucide="info" class="icon" style="width: 12px; height: 12px;"></i>
+                ${task.note}
+              </div>
+            ` : ''}
+          </div>
+        `;
+
+        listContainer.appendChild(card);
+      });
+
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    }
+
+    /* ==========================================================================
+       CHECKLIST DIÁRIO
+       ========================================================================== */
+    function toggleTaskCompletion(taskId) {
+      if (completedTasks[taskId]) {
+        delete completedTasks[taskId];
+      } else {
+        completedTasks[taskId] = true;
+      }
+      localStorage.setItem('antigravity_completed_tasks', JSON.stringify(completedTasks));
+      renderTimeline();
+    }
+  </script>
+</body>
+</html>

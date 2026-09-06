@@ -1,0 +1,76 @@
+Dia da Semana;Horário Início;Horário Fim;Duração;Atividade;Categoria;Observações / Deslocamento
+Segunda-Feira;07:00;07:35;0h35;Acordar, Higiene e Café;Pessoal;Caminhada a pé para o trabalho às 07h35
+Segunda-Feira;08:00;11:00;3h00;Trabalho (Turno Manhã);Trabalho;Expediente matinal
+Segunda-Feira;11:00;12:00;1h00;Almoço & Buscar Marmitas;Alimentação;Busca marmitas na prefeitura (almoço e janta) + refeição
+Segunda-Feira;12:00;18:00;6h00;Trabalho (Turno Tarde);Trabalho;Expediente vespertino
+Segunda-Feira;18:15;19:15;1h00;Academia;Saúde;Treino no caminho de volta do trabalho para casa
+Segunda-Feira;19:15;19:35;0h20;Deslocamento para Casa;Deslocamento;Caminhada a pé para casa
+Segunda-Feira;19:35;20:30;0h55;Banho, Janta e Descanso;Pessoal;Jantar tranquilo e relaxamento
+Segunda-Feira;20:30;22:30;2h00;Estudos: Faculdade EAD;Estudos;Ciências Contábeis: módulos teóricos e leituras
+Segunda-Feira;22:30;23:00;0h30;Organização Pessoal;Pessoal;Preparo para o descanso
+Segunda-Feira;23:00;00:30;1h30;Namorada;Relacionamento;Visita de 10 min + Ligação
+Segunda-Feira;00:45;07:00;6h15;Sono Reparador;Descanso;Dormir
+
+Terça-Feira;07:30;08:30;1h00;Acordar e Café da Manhã;Pessoal;Acordar calmo garantindo 7h de sono
+Terça-Feira;08:30;10:00;1h30;Academia;Saúde;Ida a pé + 1h treino + volta para casa
+Terça-Feira;10:00;10:45;0h45;Banho e Lanche Pós-Treino;Saúde;Higiene e hidratação
+Terça-Feira;10:50;11:30;0h40;Almoço & Pegar Marmita;Alimentação;Busca rápida de marmita (10 min) e almoço às 11h
+Terça-Feira;11:30;13:00;1h30;Estudos: Faculdade EAD;Estudos;Leituras, tarefas e exercícios conceituais
+Terça-Feira;13:00;14:15;1h15;Estudos: Curso Prático de Contabilidade;Estudos;Exercícios práticos voltados a vagas de emprego
+Terça-Feira;14:30;15:00;0h30;Deslocamento para o Trabalho;Deslocamento;Caminhada a pé
+Terça-Feira;15:00;21:00;6h00;Trabalho;Trabalho;Expediente da tarde/noite
+Terça-Feira;21:00;21:25;0h25;Retorno para Casa;Deslocamento;Caminhada a pé
+Terça-Feira;21:30;22:45;1h15;Banho e Janta;Alimentação;2ª marmita e relaxamento
+Terça-Feira;23:00;00:30;1h30;Namorada;Relacionamento;Visita rápida + Ligação
+Terça-Feira;00:45;07:30;6h45;Sono Reparador;Descanso;Dormir
+
+Quarta-Feira;07:30;08:30;1h00;Acordar e Café da Manhã;Pessoal;Hidratação e desjejum
+Quarta-Feira;08:30;10:00;1h30;Academia;Saúde;Ida a pé + 1h treino + volta
+Quarta-Feira;10:00;10:45;0h45;Banho e Organização;Pessoal;Preparação matinal
+Quarta-Feira;10:50;11:30;0h40;Almoço & Pegar Marmita;Alimentação;Almoço fixo às 11h
+Quarta-Feira;11:30;12:35;1h05;Estudos: Faculdade EAD;Estudos;Foco em matérias teóricas
+Quarta-Feira;12:35;13:00;0h25;Deslocamento para o Trabalho;Deslocamento;Caminhada a pé
+Quarta-Feira;13:00;18:00;5h00;Trabalho (Turno 1);Trabalho;Primeiro turno de trabalho
+Quarta-Feira;18:00;19:00;1h00;Pausa Jantar no Trabalho;Alimentação;2ª marmita no trabalho
+Quarta-Feira;19:00;21:00;2h00;Trabalho (Turno 2);Trabalho;Segundo turno até 21h
+Quarta-Feira;21:00;21:25;0h25;Retorno para Casa;Deslocamento;Caminhada a pé
+Quarta-Feira;21:30;22:45;1h15;Banho e Descanso;Pessoal;Descompressão
+Quarta-Feira;23:00;00:30;1h30;Namorada;Relacionamento;Visita rápida + Ligação
+Quarta-Feira;00:45;07:30;6h45;Sono Reparador;Descanso;Dormir
+
+Quinta-Feira;07:30;08:30;1h00;Acordar e Café da Manhã;Pessoal;Café e energia
+Quinta-Feira;08:30;10:00;1h30;Academia;Saúde;Ida a pé + 1h treino + volta
+Quinta-Feira;10:00;10:45;0h45;Banho e Preparação;Pessoal;Higiene e lanche
+Quinta-Feira;10:50;11:30;0h40;Almoço & Pegar Marmita;Alimentação;Almoço fixo às 11h
+Quinta-Feira;11:30;12:35;1h05;Estudos: Curso Prático de Contabilidade;Estudos;Resolução de casos práticos contábeis
+Quinta-Feira;12:35;13:00;0h25;Deslocamento para o Trabalho;Deslocamento;Caminhada a pé
+Quinta-Feira;13:00;18:00;5h00;Trabalho (Turno 1);Trabalho;Primeiro turno
+Quinta-Feira;18:00;19:00;1h00;Pausa Jantar no Trabalho;Alimentação;2ª marmita no trabalho
+Quinta-Feira;19:00;21:00;2h00;Trabalho (Turno 2);Trabalho;Segundo turno até 21h
+Quinta-Feira;21:00;21:25;0h25;Retorno para Casa;Deslocamento;Caminhada a pé
+Quinta-Feira;21:30;22:45;1h15;Banho e Lazer Leve;Pessoal;Descanso mental
+Quinta-Feira;23:00;00:30;1h30;Namorada;Relacionamento;Visita rápida + Ligação
+Quinta-Feira;00:45;07:00;6h15;Sono Reparador;Descanso;Dormir
+
+Sexta-Feira;07:00;07:35;0h35;Acordar e Café da Manhã;Pessoal;Saída para o trabalho às 07h35
+Sexta-Feira;08:00;11:00;3h00;Trabalho (Turno Manhã);Trabalho;Expediente matinal
+Sexta-Feira;11:00;12:00;1h00;Almoço & Buscar Marmitas;Alimentação;Pausa almoço
+Sexta-Feira;12:00;18:00;6h00;Trabalho (Turno Tarde);Trabalho;Expediente vespertino
+Sexta-Feira;18:15;19:15;1h00;Academia;Saúde;Treino no caminho de volta para casa
+Sexta-Feira;19:15;19:35;0h20;Deslocamento para Casa;Deslocamento;Caminhada a pé
+Sexta-Feira;19:35;20:30;0h55;Banho e Janta;Alimentação;Refeição com calma
+Sexta-Feira;20:30;22:00;1h30;Estudos: Faculdade EAD;Estudos;Fechamento dos módulos e pendências da semana
+Sexta-Feira;22:00;23:00;1h00;Descanso;Pessoal;Tempo livre
+Sexta-Feira;23:00;01:00;2h00;Namorada;Relacionamento;Visita + Ligação prolongada de sexta
+
+Sábado;07:00;07:35;0h35;Acordar e Café da Manhã;Pessoal;Saída às 07h35
+Sábado;08:00;14:00;6h00;Trabalho;Trabalho;Expediente de sábado
+Sábado;14:00;14:25;0h25;Retorno para Casa;Deslocamento;Caminhada a pé
+Sábado;14:30;18:00;3h30;Faxina Geral da Casa;Casa;Bloco único de limpeza completa da casa direto ao chegar
+Sábado;18:00;23:59;6h00;Casa da Mãe, Namorada & Livre;Lazer;Banho, refeição na casa da mãe e noite 100% livre!
+
+Domingo;07:30;08:00;0h30;Acordar Calmo;Pessoal;Água, chá e preparação
+Domingo;08:00;08:50;0h50;Psicóloga;Saúde Mental;Sessão de terapia (quinzenal)
+Domingo;08:50;09:00;0h10;Pausa e Respiração;Pessoal;Transição tranquila
+Domingo;09:00;10:00;1h00;Espiritualidade;Espiritualidade;1 hora sagrada e inviolável de conexão e recarga mental
+Domingo;10:00;23:59;14h00;Descanso Pleno e Lazer;Lazer;Casa já limpa, descanso total com a namorada e recarga

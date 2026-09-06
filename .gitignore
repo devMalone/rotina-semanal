@@ -1,0 +1,10 @@
+# Arquivos sensíveis de autenticação
+github-recovery-codes.txt
+*.key
+*.token
+*.env
+
+# Arquivos do sistema
+.DS_Store
+Thumbs.db
+desktop.ini
