@@ -559,37 +559,66 @@
       min-width: 0;
     }
 
-    .activity-time-row {
+    .activity-header-row {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 0.5rem;
-      margin-bottom: 0.25rem;
-    }
-
-    .activity-time {
-      font-size: 0.825rem;
-      font-weight: 700;
-      color: var(--text-primary);
-      font-variant-numeric: tabular-nums;
-    }
-
-    .activity-duration {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      font-weight: 500;
+      margin-bottom: 0.35rem;
     }
 
     .activity-title {
-      font-size: 1rem;
-      font-weight: 600;
+      font-size: 0.95rem;
+      font-weight: 700;
       color: var(--text-primary);
-      margin-bottom: 0.25rem;
+      margin: 0;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+    }
+
+    .activity-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .activity-time {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .category-badge {
+      background: var(--bg-tertiary);
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+      font-size: 0.72rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 5px;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .badge-now {
+      background: var(--accent);
+      color: #FFFFFF;
+      font-size: 0.7rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 5px;
+      font-weight: 700;
+      white-space: nowrap;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
     }
 
     .activity-desc {
-      font-size: 0.85rem;
+      font-size: 0.825rem;
       color: var(--text-secondary);
       line-height: 1.4;
+      margin-top: 0.35rem;
     }
 
     .activity-note {
@@ -704,8 +733,8 @@
       background: transparent;
       border: 1px solid transparent;
       color: var(--text-muted);
-      width: 30px;
-      height: 30px;
+      width: 28px;
+      height: 28px;
       border-radius: 6px;
       display: inline-flex;
       align-items: center;
@@ -1512,13 +1541,8 @@
             <i data-lucide="check" class="check-icon"></i>
           </div>
           <div class="activity-content">
-            <div class="activity-time-row">
-              <span class="activity-time">${task.start} – ${task.end}</span>
-              <span class="badge" style="background: var(--bg-tertiary); color: var(--text-secondary); border: 1px solid var(--border);">
-                ${task.cat}
-              </span>
-              ${isCurrent ? '<span class="badge" style="background: var(--accent); color: #fff;">Agora</span>' : ''}
-              
+            <div class="activity-header-row">
+              <h3 class="activity-title">${task.title}</h3>
               <div class="activity-actions">
                 <button type="button" class="btn-card-action" onclick="openEditTaskModal('${task.id}')" title="Editar atividade">
                   <i data-lucide="pencil" class="action-icon"></i>
@@ -1528,8 +1552,17 @@
                 </button>
               </div>
             </div>
-            <h3 class="activity-title">${task.title}</h3>
-            <p class="activity-desc">${task.desc}</p>
+            
+            <div class="activity-meta-row">
+              <span class="activity-time">${task.start} – ${task.end}</span>
+              <span class="category-badge">${task.cat}</span>
+              ${isCurrent ? '<span class="badge-now">Agora</span>' : ''}
+            </div>
+
+            ${task.desc && task.desc.trim().toLowerCase() !== task.title.trim().toLowerCase() ? `
+              <p class="activity-desc">${task.desc}</p>
+            ` : ''}
+
             ${task.note ? `
               <div class="activity-note">
                 <i data-lucide="info" class="icon" style="width: 12px; height: 12px;"></i>
