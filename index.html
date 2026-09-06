@@ -688,6 +688,255 @@
         scroll-behavior: auto !important;
       }
     }
+
+    /* ==========================================================================
+       08. GERENCIADOR DE ATIVIDADES (AÇÕES & MODAL)
+       ========================================================================== */
+    .activity-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    .btn-card-action {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      width: 30px;
+      height: 30px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      padding: 0;
+    }
+
+    .btn-card-action:hover {
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+      border-color: var(--border);
+    }
+
+    .btn-card-action.btn-card-delete:hover {
+      background: rgba(239, 68, 68, 0.15);
+      color: #EF4444;
+      border-color: rgba(239, 68, 68, 0.3);
+    }
+
+    .action-icon {
+      width: 14px;
+      height: 14px;
+    }
+
+    .timeline-actions-bar {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .btn-action-primary {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: var(--accent);
+      color: #FFFFFF;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-action-primary:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+
+    .btn-action-secondary {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background: var(--bg-card);
+      color: var(--text-secondary);
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-action-secondary:hover {
+      background: var(--bg-card-hover);
+      color: var(--text-primary);
+      border-color: var(--border-strong);
+    }
+
+    .btn-icon {
+      width: 16px;
+      height: 16px;
+    }
+
+    /* Modal Backdrop & Card */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(6px);
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .modal-backdrop.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .modal-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-strong);
+      border-radius: 14px;
+      width: 100%;
+      max-width: 440px;
+      padding: 1.5rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+      transform: translateY(10px);
+      transition: transform 0.2s ease;
+    }
+
+    .modal-backdrop.active .modal-card {
+      transform: translateY(0);
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .modal-heading {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .modal-close-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+    }
+
+    .modal-close-btn:hover {
+      color: var(--text-primary);
+      background: var(--bg-tertiary);
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 0.35rem;
+    }
+
+    .form-input {
+      width: 100%;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 0.9rem;
+      padding: 0.65rem 0.85rem;
+      border-radius: 8px;
+      outline: none;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .form-input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-soft);
+    }
+
+    .form-row {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .form-row .form-group {
+      flex: 1;
+    }
+
+    .modal-footer {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+      justify-content: flex-end;
+    }
+
+    .btn-cancel {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.65rem 1.15rem;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .btn-cancel:hover {
+      background: var(--bg-card-hover);
+      color: var(--text-primary);
+    }
+
+    .btn-save {
+      background: var(--accent);
+      border: none;
+      color: #FFFFFF;
+      font-family: inherit;
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.65rem 1.25rem;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .btn-save:hover {
+      opacity: 0.92;
+    }
+
   </style>
 </head>
 <body>
@@ -790,6 +1039,18 @@
       <div class="timeline" id="timelineList">
         <!-- Renderizado dinamicamente via JS -->
       </div>
+
+      <!-- BOTÕES DE GESTÃO DA ROTINA -->
+      <div class="timeline-actions-bar">
+        <button class="btn-action-primary" onclick="openAddTaskModal()">
+          <i data-lucide="plus" class="btn-icon"></i>
+          Adicionar Atividade
+        </button>
+        <button class="btn-action-secondary" onclick="resetRoutineToDefault()" title="Restaurar horários padrão da semana">
+          <i data-lucide="rotate-ccw" class="btn-icon"></i>
+          Restaurar Padrão
+        </button>
+      </div>
     </section>
 
     <!-- ESTATÍSTICAS / BALANÇO SEMANAL -->
@@ -840,7 +1101,7 @@
     /* ==========================================================================
        DADOS DA ROTINA (SEGUNDA A DOMINGO)
        ========================================================================== */
-    const ROUTINE_DATA = {
+    const DEFAULT_ROUTINE_DATA = {
       // 1: Segunda-Feira
       1: [
         { id: 'seg-1', start: '07:00', end: '07:35', title: 'Acordar', cat: 'Pessoal', desc: 'Desjejum e saída às 07h35.', note: 'Deslocamento 25 min' },
@@ -946,6 +1207,153 @@
     let selectedDay = new Date().getDay(); // Dia atual como padrão
     let currentCategory = 'all';
     let completedTasks = JSON.parse(localStorage.getItem('antigravity_completed_tasks') || '{}');
+
+    /* ==========================================================================
+       PERSISTÊNCIA E EDIÇÃO DA ROTINA (LOCALSTORAGE)
+       ========================================================================== */
+    const ROUTINE_STORAGE_KEY = 'antigravity_custom_routine_v1';
+
+    function loadRoutineData() {
+      try {
+        const saved = localStorage.getItem(ROUTINE_STORAGE_KEY);
+        if (saved) {
+          return JSON.parse(saved);
+        }
+      } catch (e) {
+        console.error('Erro ao ler rotina salva:', e);
+      }
+      const initial = JSON.parse(JSON.stringify(DEFAULT_ROUTINE_DATA));
+      saveRoutineData(initial);
+      return initial;
+    }
+
+    function saveRoutineData(data) {
+      try {
+        localStorage.setItem(ROUTINE_STORAGE_KEY, JSON.stringify(data || ROUTINE_DATA));
+      } catch (e) {
+        console.error('Erro ao salvar rotina:', e);
+      }
+    }
+
+    let ROUTINE_DATA = loadRoutineData();
+
+    function openAddTaskModal() {
+      document.getElementById('modalHeading').textContent = 'Nova Atividade';
+      document.getElementById('editTaskId').value = '';
+      document.getElementById('taskTitleInput').value = '';
+      
+      const dayTasks = ROUTINE_DATA[selectedDay] || [];
+      let nextStart = '08:00';
+      if (dayTasks.length > 0) {
+        nextStart = dayTasks[dayTasks.length - 1].end;
+      }
+      document.getElementById('taskStartInput').value = nextStart;
+      document.getElementById('taskEndInput').value = '09:00';
+      document.getElementById('taskCategorySelect').value = 'Pessoal';
+      document.getElementById('taskDescInput').value = '';
+
+      const modal = document.getElementById('taskModal');
+      modal.classList.add('active');
+      setTimeout(() => document.getElementById('taskTitleInput').focus(), 100);
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function openEditTaskModal(taskId) {
+      const dayTasks = ROUTINE_DATA[selectedDay] || [];
+      const task = dayTasks.find(t => t.id === taskId);
+      if (!task) return;
+
+      document.getElementById('modalHeading').textContent = 'Editar Atividade';
+      document.getElementById('editTaskId').value = task.id;
+      document.getElementById('taskTitleInput').value = task.title;
+      document.getElementById('taskStartInput').value = task.start;
+      document.getElementById('taskEndInput').value = task.end;
+      document.getElementById('taskCategorySelect').value = task.cat;
+      document.getElementById('taskDescInput').value = task.desc || task.note || '';
+
+      const modal = document.getElementById('taskModal');
+      modal.classList.add('active');
+      setTimeout(() => document.getElementById('taskTitleInput').focus(), 100);
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function closeTaskModal() {
+      const modal = document.getElementById('taskModal');
+      modal.classList.remove('active');
+    }
+
+    function handleSaveTask(event) {
+      event.preventDefault();
+      const taskId = document.getElementById('editTaskId').value;
+      const title = document.getElementById('taskTitleInput').value.trim();
+      const start = document.getElementById('taskStartInput').value;
+      const end = document.getElementById('taskEndInput').value;
+      const cat = document.getElementById('taskCategorySelect').value;
+      const desc = document.getElementById('taskDescInput').value.trim();
+
+      if (!title || !start || !end) return;
+
+      if (!ROUTINE_DATA[selectedDay]) {
+        ROUTINE_DATA[selectedDay] = [];
+      }
+
+      if (taskId) {
+        // Atualizar existente
+        const idx = ROUTINE_DATA[selectedDay].findIndex(t => t.id === taskId);
+        if (idx !== -1) {
+          ROUTINE_DATA[selectedDay][idx] = {
+            id: taskId,
+            start,
+            end,
+            title,
+            cat,
+            desc: desc || title
+          };
+        }
+      } else {
+        // Criar novo
+        const newId = `custom-${Date.now()}`;
+        ROUTINE_DATA[selectedDay].push({
+          id: newId,
+          start,
+          end,
+          title,
+          cat,
+          desc: desc || title
+        });
+      }
+
+      // Ordena tarefas do dia cronologicamente pelo horário de início
+      ROUTINE_DATA[selectedDay].sort((a, b) => a.start.localeCompare(b.start));
+
+      saveRoutineData();
+      closeTaskModal();
+      renderTimeline();
+      updateLiveTracker();
+    }
+
+    function deleteTask(taskId) {
+      const dayTasks = ROUTINE_DATA[selectedDay] || [];
+      const task = dayTasks.find(t => t.id === taskId);
+      const name = task ? `"${task.title}"` : 'esta atividade';
+      
+      if (confirm(`Deseja realmente excluir ${name}?`)) {
+        ROUTINE_DATA[selectedDay] = dayTasks.filter(t => t.id !== taskId);
+        saveRoutineData();
+        renderTimeline();
+        updateLiveTracker();
+      }
+    }
+
+    function resetRoutineToDefault() {
+      if (confirm('Deseja restaurar todos os horários padrão da rotina semanal? Suas edições personalizadas serão redefinidas.')) {
+        ROUTINE_DATA = JSON.parse(JSON.stringify(DEFAULT_ROUTINE_DATA));
+        saveRoutineData();
+        renderTimeline();
+        updateLiveTracker();
+      }
+    }
+
 
     /* ==========================================================================
        INICIALIZAÇÃO E EVENTOS
@@ -1110,6 +1518,15 @@
                 ${task.cat}
               </span>
               ${isCurrent ? '<span class="badge" style="background: var(--accent); color: #fff;">Agora</span>' : ''}
+              
+              <div class="activity-actions">
+                <button type="button" class="btn-card-action" onclick="openEditTaskModal('${task.id}')" title="Editar atividade">
+                  <i data-lucide="pencil" class="action-icon"></i>
+                </button>
+                <button type="button" class="btn-card-action btn-card-delete" onclick="deleteTask('${task.id}')" title="Excluir atividade">
+                  <i data-lucide="trash-2" class="action-icon"></i>
+                </button>
+              </div>
             </div>
             <h3 class="activity-title">${task.title}</h3>
             <p class="activity-desc">${task.desc}</p>
@@ -1143,5 +1560,62 @@
       renderTimeline();
     }
   </script>
+  <!-- MODAL DE EDIÇÃO / CRIAÇÃO DE ATIVIDADE -->
+  <div id="taskModal" class="modal-backdrop">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modalHeading" class="modal-heading">Editar Atividade</h3>
+        <button type="button" class="modal-close-btn" onclick="closeTaskModal()">
+          <i data-lucide="x" class="icon"></i>
+        </button>
+      </div>
+      <form id="taskForm" onsubmit="handleSaveTask(event)">
+        <input type="hidden" id="editTaskId" value="">
+
+        <div class="form-group">
+          <label class="form-label" for="taskTitleInput">Nome da Atividade</label>
+          <input type="text" id="taskTitleInput" class="form-input" required placeholder="Ex: Acordar, Trabalho, etc.">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="taskStartInput">Horário Início</label>
+            <input type="time" id="taskStartInput" class="form-input" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="taskEndInput">Horário Fim</label>
+            <input type="time" id="taskEndInput" class="form-input" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="taskCategorySelect">Etiqueta / Categoria</label>
+          <select id="taskCategorySelect" class="form-input">
+            <option value="Trabalho">Trabalho</option>
+            <option value="Estudos">Estudos</option>
+            <option value="Saúde">Academia / Saúde</option>
+            <option value="Alimentação">Alimentação</option>
+            <option value="Casa">Casa & Faxina</option>
+            <option value="Espiritualidade">Espiritualidade</option>
+            <option value="Pessoal">Pessoal</option>
+            <option value="Relacionamento">Namorada</option>
+            <option value="Deslocamento">Deslocamento</option>
+            <option value="Descanso">Dormir / Descanso</option>
+            <option value="Lazer">Lazer</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="taskDescInput">Observação (opcional)</label>
+          <input type="text" id="taskDescInput" class="form-input" placeholder="Ex: Notas ou detalhes rápidos">
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-cancel" onclick="closeTaskModal()">Cancelar</button>
+          <button type="submit" class="btn-save">Salvar Alterações</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </body>
 </html>
