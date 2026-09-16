@@ -1346,6 +1346,187 @@
     .pulse-transition {
       animation: liveTransitionGlow 1.4s ease-out;
     }
+
+    /* ==========================================================================
+       ECOSYSTEM HUB & QUICK APP SWITCHER
+       ========================================================================== */
+    .btn-apps-hub {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-apps-hub:hover {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .ecosystem-modal-backdrop {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      padding: 1rem;
+    }
+    .ecosystem-modal-backdrop.active {
+      display: flex;
+    }
+    .ecosystem-modal-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 440px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+      animation: ecoModalIn 0.2s ease-out;
+    }
+    @keyframes ecoModalIn {
+      from { opacity: 0; transform: scale(0.96) translateY(8px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .ecosystem-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .ecosystem-title-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .ecosystem-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .ecosystem-subtitle {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+    .ecosystem-close-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+    }
+    .ecosystem-close-btn:hover {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.08);
+    }
+    .ecosystem-apps-list {
+      padding: 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .ecosystem-app-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem 1rem;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+    .ecosystem-app-item:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+    .ecosystem-app-item.is-current {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      cursor: default;
+    }
+    .ecosystem-app-info {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+    }
+    .ecosystem-app-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .ecosystem-app-texts {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .ecosystem-app-name {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    .ecosystem-app-desc {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      line-height: 1.3;
+    }
+    .ecosystem-app-badge {
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+    .badge-current-app {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: #10B981;
+    }
+    .badge-switch-app {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+    .ecosystem-footer {
+      padding: 0.75rem 1.25rem;
+      background: var(--bg-tertiary);
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
   </style>
 </head>
 <body>
@@ -1359,6 +1540,9 @@
         <span class="brand-badge" style="display: inline-flex; align-items: center; gap: 4px; font-size: 0.72rem; padding: 2px 8px; border-radius: 9999px; background: var(--accent-soft); color: var(--accent);"><i data-lucide="sparkles" style="width: 12px; height: 12px;"></i> Painel Pessoal</span>
       </div>
       <div class="header-actions">
+        <button type="button" class="btn-apps-hub" onclick="openEcosystemModal()" title="Ecossistema Antigravity (Alternar App)" aria-label="Alternar Aplicativo">
+          <i data-lucide="layout-grid" class="icon"></i>
+        </button>
         <button id="themeToggle" class="theme-toggle-btn" title="Alternar Modo Claro/Escuro" aria-label="Alternar Tema">
           <i data-lucide="sun" id="themeIcon" class="icon"></i>
         </button>
@@ -2453,6 +2637,49 @@
     }
 
     /* ==========================================================================
+       ECOSSISTEMA ANTIGRAVITY (CROSS-APP SWITCHER)
+       ========================================================================== */
+    function getEcosystemAppUrl(targetApp) {
+      const isGitHubPages = window.location.hostname.includes('github.io');
+      if (isGitHubPages) {
+        const urls = {
+          radar: 'https://devmalone.github.io/radar-concursos/',
+          financeiro: 'https://devmalone.github.io/controle-financeiro/',
+          rotina: 'https://devmalone.github.io/rotina-semanal/'
+        };
+        return urls[targetApp] || '#';
+      }
+      const localUrls = {
+        radar: '../Radar de Concursos/index.html',
+        financeiro: '../Controle Financeiro/index.html',
+        rotina: '../Rotina Semanal/index.html'
+      };
+      return localUrls[targetApp] || '#';
+    }
+
+    function openEcosystemModal() {
+      const modal = document.getElementById('ecosystemModal');
+      if (modal) {
+        modal.classList.add('active');
+        if (window.lucide) lucide.createIcons();
+      }
+    }
+
+    function closeEcosystemModal() {
+      const modal = document.getElementById('ecosystemModal');
+      if (modal) {
+        modal.classList.remove('active');
+      }
+    }
+
+    function navigateToApp(targetApp) {
+      const url = getEcosystemAppUrl(targetApp);
+      if (url && url !== '#') {
+        window.location.href = url;
+      }
+    }
+
+    /* ==========================================================================
        REGISTRO PWA SERVICE WORKER
        ========================================================================== */
     if ('serviceWorker' in navigator) {
@@ -2545,5 +2772,81 @@
       <span>Tema</span>
     </button>
   </nav>
+
+  <!-- MODAL DO ECOSSISTEMA ANTIGRAVITY (CROSS-APP SWITCHER) -->
+  <div id="ecosystemModal" class="ecosystem-modal-backdrop" onclick="if(event.target === this) closeEcosystemModal()">
+    <div class="ecosystem-modal-card">
+      <div class="ecosystem-header">
+        <div class="ecosystem-title-wrap">
+          <div class="ecosystem-title">
+            <i data-lucide="layout-grid" class="icon" style="color: var(--accent);"></i>
+            Ecossistema Antigravity
+          </div>
+          <span class="ecosystem-subtitle">Selecione o utilitário para alternar rapidamente</span>
+        </div>
+        <button type="button" class="ecosystem-close-btn" onclick="closeEcosystemModal()" title="Fechar janela">
+          <i data-lucide="x" class="icon"></i>
+        </button>
+      </div>
+
+      <div class="ecosystem-apps-list">
+        <!-- RADAR DE CONCURSOS -->
+        <div class="ecosystem-app-item" onclick="navigateToApp('radar')" title="Abrir Radar de Concursos SP">
+          <div class="ecosystem-app-info">
+            <div class="ecosystem-app-icon" style="background: rgba(6, 182, 212, 0.12); color: #06B6D4; border: 1px solid rgba(6, 182, 212, 0.25);">
+              <i data-lucide="radar" style="width: 20px; height: 20px;"></i>
+            </div>
+            <div class="ecosystem-app-texts">
+              <span class="ecosystem-app-name">Radar de Concursos SP</span>
+              <span class="ecosystem-app-desc">Editais abertos, busca inteligente IA e cronograma de provas</span>
+            </div>
+          </div>
+          <span class="ecosystem-app-badge badge-switch-app">
+            <span>Acessar</span>
+            <i data-lucide="arrow-up-right" style="width: 12px; height: 12px;"></i>
+          </span>
+        </div>
+
+        <!-- CONTROLE FINANCEIRO -->
+        <div class="ecosystem-app-item" onclick="navigateToApp('financeiro')" title="Abrir Controle Financeiro">
+          <div class="ecosystem-app-info">
+            <div class="ecosystem-app-icon" style="background: rgba(16, 185, 129, 0.12); color: #10B981; border: 1px solid rgba(16, 185, 129, 0.25);">
+              <i data-lucide="wallet" style="width: 20px; height: 20px;"></i>
+            </div>
+            <div class="ecosystem-app-texts">
+              <span class="ecosystem-app-name">Controle Financeiro</span>
+              <span class="ecosystem-app-desc">Orçamento mensal, parcelamentos inteligentes e tetos</span>
+            </div>
+          </div>
+          <span class="ecosystem-app-badge badge-switch-app">
+            <span>Acessar</span>
+            <i data-lucide="arrow-up-right" style="width: 12px; height: 12px;"></i>
+          </span>
+        </div>
+
+        <!-- ROTINA SEMANAL (ATUAL) -->
+        <div class="ecosystem-app-item is-current" title="Aplicativo em uso no momento">
+          <div class="ecosystem-app-info">
+            <div class="ecosystem-app-icon" style="background: var(--accent-soft); color: var(--accent); border: 1px solid var(--accent);">
+              <i data-lucide="calendar-clock" style="width: 20px; height: 20px;"></i>
+            </div>
+            <div class="ecosystem-app-texts">
+              <span class="ecosystem-app-name">Rotina Semanal</span>
+              <span class="ecosystem-app-desc">Horários ao vivo, hábitos, consistência e alertas sonoros</span>
+            </div>
+          </div>
+          <span class="ecosystem-app-badge badge-current-app">
+            <i data-lucide="check" style="width: 11px; height: 11px;"></i>
+            <span>Atual</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="ecosystem-footer">
+        <span>PWA Local-First • Offline Ready</span>
+        <span>Antigravity Ecosystem</span>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
