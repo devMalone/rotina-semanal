@@ -1,5 +1,5 @@
 // Service Worker — Rotina Semanal PWA
-const CACHE_NAME = 'rotina-semanal-v1';
+const CACHE_NAME = 'rotina-semanal-v2';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',

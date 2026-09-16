@@ -1046,6 +1046,68 @@
         transform: scale(0.92);
       }
     }
+
+    /* ==========================================================================
+       SOM & TRANSIÇÃO DE ATIVIDADE
+       ========================================================================== */
+    .live-sound-btn {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .live-sound-btn.active {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+    .live-footer-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .btn-micro-chime {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 0.74rem;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-micro-chime:hover {
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+    }
+    .btn-micro-chime.active {
+      background: rgba(16, 185, 129, 0.12);
+      border-color: rgba(16, 185, 129, 0.35);
+      color: var(--cat-saude);
+    }
+    @keyframes liveTransitionGlow {
+      0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.6); }
+      70% { box-shadow: 0 0 0 16px rgba(59, 130, 246, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+    }
+    .pulse-transition {
+      animation: liveTransitionGlow 1.4s ease-out;
+    }
   </style>
 </head>
 <body>
@@ -1075,7 +1137,12 @@
           <div class="pulse-dot"></div>
           O Que Fazer Agora
         </div>
-        <div class="live-time" id="currentTimeDisplay">--:--</div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <button type="button" id="btnToggleSound" class="live-sound-btn" onclick="toggleRoutineSound()" title="Ativar alerta sonoro nas transições de horário">
+            <i data-lucide="bell-off" id="soundIcon" style="width: 15px; height: 15px;"></i>
+          </button>
+          <div class="live-time" id="currentTimeDisplay">--:--</div>
+        </div>
       </div>
       <h2 class="live-title" id="liveActivityTitle">Carregando rotina...</h2>
       <p class="live-desc" id="liveActivityDesc">Identificando atividade programada para este horário.</p>
@@ -1092,6 +1159,16 @@
           <i data-lucide="fast-forward" class="icon"></i>
           <span id="liveNextActivity">Próxima: Carregando...</span>
         </div>
+      </div>
+      <div class="live-footer-bar">
+        <button type="button" class="btn-micro-chime" onclick="testTransitionChime()" title="Testar toque sonoro harmônico">
+          <i data-lucide="volume-2" style="width: 13px; height: 13px;"></i>
+          <span>Ouvir Chime</span>
+        </button>
+        <button type="button" class="btn-micro-chime" id="btnReqNotification" onclick="requestNotificationPermission()" title="Receber aviso no celular ao iniciar cada atividade">
+          <i data-lucide="bell" style="width: 13px; height: 13px;"></i>
+          <span id="notifStatusText">Ativar Notificações</span>
+        </button>
       </div>
     </section>
 
@@ -1471,11 +1548,14 @@
       initTheme();
       renderDaysNav();
       setupCategoryFilter();
+      updateSoundUI();
+      updateNotificationUI();
       updateLiveTracker();
       renderTimeline();
+      updateTouchThemeIcon();
       
-      // Atualiza relógio e live card a cada 30 segundos
-      setInterval(updateLiveTracker, 30000);
+      // Atualiza relógio e live card a cada 10 segundos
+      setInterval(updateLiveTracker, 10000);
       
       // Atualiza os ícones do Lucide
       if (window.lucide) {
@@ -1548,6 +1628,131 @@
     /* ==========================================================================
        MOTOR DO "O QUE FAZER AGORA" (LIVE TRACKER)
        ========================================================================== */
+    let audioCtx = null;
+    let soundEnabled = localStorage.getItem('antigravity_sound_enabled') === 'true';
+    let lastNotifiedTaskId = null;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+        if (AudioContextClass) {
+          audioCtx = new AudioContextClass();
+        }
+      }
+      if (audioCtx && audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    function playTransitionChime() {
+      try {
+        const ctx = getAudioContext();
+        if (!ctx) return;
+
+        const now = ctx.currentTime;
+
+        // Tom 1: 587.33 Hz (D5)
+        const osc1 = ctx.createOscillator();
+        const gain1 = ctx.createGain();
+        osc1.type = 'sine';
+        osc1.frequency.setValueAtTime(587.33, now);
+        gain1.gain.setValueAtTime(0, now);
+        gain1.gain.linearRampToValueAtTime(0.18, now + 0.04);
+        gain1.gain.exponentialRampToValueAtTime(0.001, now + 0.55);
+        osc1.connect(gain1);
+        gain1.connect(ctx.destination);
+        osc1.start(now);
+        osc1.stop(now + 0.6);
+
+        // Tom 2: 880.00 Hz (A5)
+        const osc2 = ctx.createOscillator();
+        const gain2 = ctx.createGain();
+        osc2.type = 'sine';
+        osc2.frequency.setValueAtTime(880.00, now + 0.18);
+        gain2.gain.setValueAtTime(0, now + 0.18);
+        gain2.gain.linearRampToValueAtTime(0.22, now + 0.22);
+        gain2.gain.exponentialRampToValueAtTime(0.001, now + 0.85);
+        osc2.connect(gain2);
+        gain2.connect(ctx.destination);
+        osc2.start(now + 0.18);
+        osc2.stop(now + 0.9);
+      } catch (err) {
+        console.warn('[Chime] Erro ao tocar som:', err);
+      }
+    }
+
+    function toggleRoutineSound() {
+      getAudioContext();
+      soundEnabled = !soundEnabled;
+      localStorage.setItem('antigravity_sound_enabled', soundEnabled ? 'true' : 'false');
+      updateSoundUI();
+      if (soundEnabled) {
+        playTransitionChime();
+      }
+    }
+
+    function testTransitionChime() {
+      getAudioContext();
+      playTransitionChime();
+    }
+
+    function updateSoundUI() {
+      const icon = document.getElementById('soundIcon');
+      const btn = document.getElementById('btnToggleSound');
+      if (icon) {
+        icon.setAttribute('data-lucide', soundEnabled ? 'bell' : 'bell-off');
+      }
+      if (btn) {
+        btn.classList.toggle('active', soundEnabled);
+        btn.title = soundEnabled ? 'Sinal sonoro ativado (Clique para desativar)' : 'Sinal sonoro desativado (Clique para ativar)';
+      }
+      if (window.lucide) lucide.createIcons();
+    }
+
+    function requestNotificationPermission() {
+      if (!('Notification' in window)) {
+        alert('Este navegador não suporta notificações de sistema.');
+        return;
+      }
+      Notification.requestPermission().then(permission => {
+        updateNotificationUI();
+        if (permission === 'granted') {
+          try {
+            new Notification('Rotina Semanal', {
+              body: 'Notificações de transição de horário ativadas!',
+              icon: 'icon-192.png'
+            });
+          } catch(e) {}
+        }
+      });
+    }
+
+    function updateNotificationUI() {
+      const text = document.getElementById('notifStatusText');
+      const btn = document.getElementById('btnReqNotification');
+      if (!('Notification' in window)) {
+        if (btn) btn.style.display = 'none';
+        return;
+      }
+      if (Notification.permission === 'granted') {
+        if (text) text.textContent = 'Notificações Ativas';
+        if (btn) {
+          btn.classList.add('active');
+          btn.title = 'Notificações do sistema concedidas';
+        }
+      } else if (Notification.permission === 'denied') {
+        if (text) text.textContent = 'Notificações Bloqueadas';
+        if (btn) {
+          btn.classList.remove('active');
+          btn.title = 'Permissão bloqueada no navegador';
+        }
+      } else {
+        if (text) text.textContent = 'Ativar Notificações';
+        if (btn) btn.classList.remove('active');
+      }
+    }
+
     function updateLiveTracker() {
       const now = new Date();
       const currentDay = now.getDay();
@@ -1573,12 +1778,40 @@
       }
 
       if (currentTask) {
+        // Alerta sonoro e notificação quando transitar de atividade
+        if (lastNotifiedTaskId !== currentTask.id) {
+          if (lastNotifiedTaskId !== null) {
+            if (soundEnabled) {
+              playTransitionChime();
+            }
+            if ('Notification' in window && Notification.permission === 'granted') {
+              try {
+                new Notification(`Início: ${currentTask.title}`, {
+                  body: `${currentTask.start} às ${currentTask.end} • ${currentTask.desc || currentTask.cat}`,
+                  icon: 'icon-192.png',
+                  tag: 'rotina-transition'
+                });
+              } catch(e) {
+                console.warn('[Notification] Falha:', e);
+              }
+            }
+            const card = document.getElementById('liveSection');
+            if (card) {
+              card.classList.remove('pulse-transition');
+              void card.offsetWidth;
+              card.classList.add('pulse-transition');
+            }
+          }
+          lastNotifiedTaskId = currentTask.id;
+        }
+
         document.getElementById('liveActivityTitle').textContent = currentTask.title;
         document.getElementById('liveActivityDesc').textContent = currentTask.desc;
         document.getElementById('liveTimeWindow').textContent = `${currentTask.start} às ${currentTask.end}`;
         document.getElementById('liveCategory').textContent = currentTask.cat;
         document.getElementById('liveNextActivity').textContent = nextTask ? `Próxima: ${nextTask.title} (${nextTask.start})` : 'Fim do cronograma de hoje';
       } else {
+        lastNotifiedTaskId = 'free';
         document.getElementById('liveActivityTitle').textContent = 'Momento Livre / Intervalo';
         document.getElementById('liveActivityDesc').textContent = 'Nenhuma atividade obrigatória em andamento neste instante.';
         document.getElementById('liveTimeWindow').textContent = 'Descanso / Livre';
