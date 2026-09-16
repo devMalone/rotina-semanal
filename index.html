@@ -966,6 +966,86 @@
       opacity: 0.92;
     }
 
+    /* ==========================================================================
+       TOUCH BOTTOM BAR (MOBILE THUMB ZONE)
+       ========================================================================== */
+    .touch-bottom-bar {
+      display: none;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding-bottom: calc(76px + env(safe-area-inset-bottom, 16px));
+      }
+
+      .touch-bottom-bar {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: calc(62px + env(safe-area-inset-bottom, 0px));
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+        background: var(--bg-card);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-top: 1px solid var(--border);
+        z-index: 990;
+        align-items: center;
+        justify-content: space-around;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
+      }
+
+      .touch-bar-btn {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+        background: transparent;
+        border: none;
+        color: var(--text-muted);
+        font-size: 0.68rem;
+        font-weight: 600;
+        cursor: pointer;
+        padding: 6px 0;
+        transition: color 0.2s ease;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .touch-bar-btn:active, .touch-bar-btn.active {
+        color: var(--accent);
+      }
+
+      .touch-bar-icon {
+        width: 20px;
+        height: 20px;
+      }
+
+      .touch-bar-btn.primary-action {
+        position: relative;
+        top: -12px;
+        color: var(--text-primary);
+      }
+
+      .touch-bar-fab {
+        width: 46px;
+        height: 46px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent) 0%, #2563EB 100%);
+        color: #FFFFFF;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 14px var(--accent-glow);
+        transition: transform 0.15s ease;
+      }
+
+      .touch-bar-fab:active {
+        transform: scale(0.92);
+      }
+    }
   </style>
 </head>
 <body>
@@ -976,7 +1056,7 @@
       <div class="brand-title">
         <i data-lucide="calendar-clock" class="icon" style="color: var(--accent);"></i>
         Rotina Semanal
-        <span>✦ Painel Pessoal</span>
+        <span class="brand-badge" style="display: inline-flex; align-items: center; gap: 4px; font-size: 0.72rem; padding: 2px 8px; border-radius: 9999px; background: var(--accent-soft); color: var(--accent);"><i data-lucide="sparkles" style="width: 12px; height: 12px;"></i> Painel Pessoal</span>
       </div>
       <div class="header-actions">
         <button id="themeToggle" class="theme-toggle-btn" title="Alternar Modo Claro/Escuro" aria-label="Alternar Tema">
@@ -1592,6 +1672,54 @@
       localStorage.setItem('antigravity_completed_tasks', JSON.stringify(completedTasks));
       renderTimeline();
     }
+
+    /* ==========================================================================
+       BARRA TÁTIL MOBILE & NAVEGAÇÃO
+       ========================================================================== */
+    function scrollToToday() {
+      const todayIndex = new Date().getDay();
+      selectDay(todayIndex);
+      const daysNav = document.getElementById('daysNav');
+      if (daysNav) {
+        daysNav.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+
+    function scrollToDaysNav() {
+      const el = document.getElementById('daysNav');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function scrollToStats() {
+      const el = document.querySelector('.stats-card');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function toggleThemeAction() {
+      const toggleBtn = document.getElementById('themeToggle');
+      if (toggleBtn) toggleBtn.click();
+      updateTouchThemeIcon();
+    }
+
+    function updateTouchThemeIcon() {
+      const touchIcon = document.getElementById('touchThemeIcon');
+      if (touchIcon) {
+        const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+        touchIcon.setAttribute('data-lucide', isLight ? 'moon' : 'sun');
+        if (window.lucide) lucide.createIcons();
+      }
+    }
+
+    /* ==========================================================================
+       REGISTRO PWA SERVICE WORKER
+       ========================================================================== */
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(reg => console.log('[SW] Rotina Semanal registrado:', reg.scope))
+          .catch(err => console.warn('[SW] Falha ao registrar:', err));
+      });
+    }
   </script>
   <!-- MODAL DE EDIÇÃO / CRIAÇÃO DE ATIVIDADE -->
   <div id="taskModal" class="modal-backdrop">
@@ -1650,5 +1778,30 @@
       </form>
     </div>
   </div>
+  <!-- BARRA DE NAVEGAÇÃO TÁTIL INFERIOR (MOBILE THUMB ZONE) -->
+  <nav class="touch-bottom-bar" aria-label="Navegação Rápida">
+    <button type="button" class="touch-bar-btn" onclick="scrollToToday()" id="btnNavToday" title="Ver cronograma de hoje">
+      <i data-lucide="calendar-check" class="touch-bar-icon"></i>
+      <span>Hoje</span>
+    </button>
+    <button type="button" class="touch-bar-btn" onclick="scrollToDaysNav()" title="Escolher dia da semana">
+      <i data-lucide="calendar-days" class="touch-bar-icon"></i>
+      <span>Semana</span>
+    </button>
+    <button type="button" class="touch-bar-btn primary-action" onclick="openAddTaskModal()" title="Adicionar Nova Atividade">
+      <div class="touch-bar-fab">
+        <i data-lucide="plus" style="width: 24px; height: 24px;"></i>
+      </div>
+      <span>Criar</span>
+    </button>
+    <button type="button" class="touch-bar-btn" onclick="scrollToStats()" title="Ver balanço de horas">
+      <i data-lucide="pie-chart" class="touch-bar-icon"></i>
+      <span>Balanço</span>
+    </button>
+    <button type="button" class="touch-bar-btn" onclick="toggleThemeAction()" title="Alternar tema">
+      <i data-lucide="moon" id="touchThemeIcon" class="touch-bar-icon"></i>
+      <span>Tema</span>
+    </button>
+  </nav>
 </body>
 </html>
