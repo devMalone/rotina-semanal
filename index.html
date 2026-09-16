@@ -634,24 +634,249 @@
     }
 
     /* ==========================================================================
-       08. RESUMO & ESTATÍSTICAS DA SEMANA
+       08. RESUMO, ESTATÍSTICAS DA SEMANA & HEATMAP DE HÁBITOS
        ========================================================================== */
     .stats-card {
       background: var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 14px;
       padding: 1.25rem;
       margin-top: 1.5rem;
+      backdrop-filter: blur(12px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .stats-header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
     }
 
     .stats-title {
-      font-size: 0.95rem;
+      font-size: 1rem;
       font-weight: 700;
       color: var(--text-primary);
-      margin-bottom: 0.85rem;
       display: flex;
       align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0;
+    }
+
+    .btn-micro-reset {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.35rem 0.65rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-micro-reset:hover {
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--border-strong);
+    }
+
+    /* Consistência Card */
+    .consistency-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .consistency-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+    }
+
+    .consistency-metric {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .consistency-pct {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--accent);
+    }
+
+    .consistency-texts {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .consistency-label {
+      font-size: 0.825rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .consistency-sub {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .consistency-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.28);
+      color: #F59E0B;
+      padding: 0.3rem 0.6rem;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .consistency-track {
+      width: 100%;
+      height: 8px;
+      background: var(--bg-tertiary);
+      border-radius: 999px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .consistency-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent), #10B981);
+      transition: width 0.4s ease;
+    }
+
+    /* Heatmap de 7 Dias */
+    .heatmap-container {
+      margin-bottom: 1.25rem;
+    }
+
+    .heatmap-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-bottom: 0.65rem;
+      flex-wrap: wrap;
+    }
+
+    .heatmap-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .heatmap-sub {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+    }
+
+    .heatmap-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
       gap: 0.45rem;
+    }
+
+    @media (max-width: 580px) {
+      .heatmap-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+
+    .heatmap-pill {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.6rem 0.35rem;
+      text-align: center;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+
+    .heatmap-pill:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .heatmap-pill.is-active-day {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .heatmap-day-tag {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+    }
+
+    .heatmap-pill.is-active-day .heatmap-day-tag {
+      color: var(--accent);
+    }
+
+    .heatmap-bar-wrap {
+      width: 100%;
+      height: 4px;
+      background: var(--bg-tertiary);
+      border-radius: 2px;
+      overflow: hidden;
+      margin: 0.15rem 0;
+    }
+
+    .heatmap-bar-fill {
+      height: 100%;
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+
+    .heatmap-pct-tag {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .stats-section-subtitle {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 0.65rem;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
     }
 
     .stats-grid {
@@ -668,21 +893,34 @@
       display: flex;
       flex-direction: column;
       gap: 0.25rem;
+      transition: border-color 0.2s ease;
+    }
+
+    .stat-box:hover {
+      border-color: var(--border-strong);
     }
 
     .stat-label {
-      font-size: 0.75rem;
+      font-size: 0.725rem;
       color: var(--text-muted);
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.03em;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
     }
 
     .stat-val {
-      font-size: 1.25rem;
+      font-size: 1.15rem;
       font-weight: 700;
       color: var(--text-primary);
       font-family: 'Space Grotesk', sans-serif;
+    }
+
+    .stat-sub {
+      font-size: 0.7rem;
+      color: var(--text-muted);
     }
 
     /* ==========================================================================
@@ -1239,37 +1477,60 @@
       </div>
     </section>
 
-    <!-- ESTATÍSTICAS / BALANÇO SEMANAL -->
-    <section class="stats-card">
-      <div class="stats-title">
-        <i data-lucide="pie-chart" class="icon" style="color: var(--accent);"></i>
-        Balanço Semanal de Horas Dedicadas
+    <!-- ESTATÍSTICAS / BALANÇO SEMANAL & HEATMAP DE HÁBITOS -->
+    <section class="stats-card" id="weeklyStatsSection">
+      <div class="stats-header-bar">
+        <div class="stats-title">
+          <i data-lucide="pie-chart" class="icon" style="color: var(--accent);"></i>
+          Balanço Semanal & Hábitos
+        </div>
+        <button type="button" class="btn-micro-reset" onclick="resetWeeklyChecklist()" title="Limpar marcações de tarefas concluídas para iniciar nova semana">
+          <i data-lucide="rotate-ccw" style="width: 12px; height: 12px;"></i>
+          <span>Novo Ciclo Semanal</span>
+        </button>
       </div>
-      <div class="stats-grid">
-        <div class="stat-box">
-          <span class="stat-label">Faculdade EAD</span>
-          <span class="stat-val">6h 00m</span>
+
+      <!-- CONSISTÊNCIA SEMANAL BANNER -->
+      <div class="consistency-card">
+        <div class="consistency-top">
+          <div class="consistency-metric">
+            <span class="consistency-pct" id="consistencyScorePct">0%</span>
+            <div class="consistency-texts">
+              <span class="consistency-label" id="consistencyStatusLabel">Consistência da Semana</span>
+              <span class="consistency-sub" id="consistencyDetailText">0 de 0 atividades concluídas</span>
+            </div>
+          </div>
+          <div class="consistency-badge" id="consistencyBadge">
+            <i data-lucide="flame" class="icon" style="width: 14px; height: 14px; color: #F59E0B;"></i>
+            <span id="consistencyBadgeText">Em Progresso</span>
+          </div>
         </div>
-        <div class="stat-box">
-          <span class="stat-label">Curso Prático</span>
-          <span class="stat-val">2h 15m</span>
+        <div class="consistency-track">
+          <div class="consistency-fill" id="consistencyProgressFill" style="width: 0%;"></div>
         </div>
-        <div class="stat-box">
-          <span class="stat-label">Academia</span>
-          <span class="stat-val">5 treinos</span>
+      </div>
+
+      <!-- HEATMAP DE 7 DIAS -->
+      <div class="heatmap-container">
+        <div class="heatmap-header">
+          <span class="heatmap-title">
+            <i data-lucide="calendar-check" class="icon" style="width: 14px; height: 14px; color: var(--accent);"></i>
+            Adesão Diária ao Cronograma
+          </span>
+          <span class="heatmap-sub">Clique em um dia para navegar</span>
         </div>
-        <div class="stat-box">
-          <span class="stat-label">Faxina Geral</span>
-          <span class="stat-val">3h 30m</span>
+        <div class="heatmap-grid" id="habitHeatmapGrid">
+          <!-- Renderizado dinamicamente via JS -->
         </div>
-        <div class="stat-box">
-          <span class="stat-label">Espiritualidade</span>
-          <span class="stat-val">1h 00m</span>
-        </div>
-        <div class="stat-box">
-          <span class="stat-label">Sono Médio</span>
-          <span class="stat-val">~7h/noite</span>
-        </div>
+      </div>
+
+      <!-- GRADE DE HORAS POR CATEGORIA (RECALCULADA DINAMICAMENTE) -->
+      <div class="stats-section-subtitle">
+        <i data-lucide="clock" class="icon" style="width: 13px; height: 13px; color: var(--text-muted);"></i>
+        Horas Dedicadas por Área (Calculadas do Cronograma)
+      </div>
+      <div class="stats-grid" id="dynamicStatsGrid">
+        <!-- Preenchido via calculateWeeklyStats() -->
       </div>
     </section>
 
@@ -1516,6 +1777,9 @@
       closeTaskModal();
       renderTimeline();
       updateLiveTracker();
+      calculateWeeklyStats();
+      updateConsistencyUI();
+      renderHeatmap();
     }
 
     function deleteTask(taskId) {
@@ -1528,6 +1792,9 @@
         saveRoutineData();
         renderTimeline();
         updateLiveTracker();
+        calculateWeeklyStats();
+        updateConsistencyUI();
+        renderHeatmap();
       }
     }
 
@@ -1537,6 +1804,9 @@
         saveRoutineData();
         renderTimeline();
         updateLiveTracker();
+        calculateWeeklyStats();
+        updateConsistencyUI();
+        renderHeatmap();
       }
     }
 
@@ -1552,6 +1822,9 @@
       updateNotificationUI();
       updateLiveTracker();
       renderTimeline();
+      calculateWeeklyStats();
+      updateConsistencyUI();
+      renderHeatmap();
       updateTouchThemeIcon();
       
       // Atualiza relógio e live card a cada 10 segundos
@@ -1589,7 +1862,7 @@
     }
 
     /* ==========================================================================
-       SELETOR DE DIAS
+       SELETOR DE DIAS & NAVEGAÇÃO
        ========================================================================== */
     function renderDaysNav() {
       const buttons = document.querySelectorAll('.day-btn');
@@ -1602,12 +1875,24 @@
         }
 
         btn.addEventListener('click', () => {
-          selectedDay = day;
-          buttons.forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          renderTimeline();
+          selectDay(day);
         });
       });
+    }
+
+    function selectDay(day) {
+      selectedDay = day;
+      const buttons = document.querySelectorAll('.day-btn');
+      buttons.forEach(b => {
+        const bDay = parseInt(b.getAttribute('data-day'), 10);
+        if (bDay === day) {
+          b.classList.add('active');
+        } else {
+          b.classList.remove('active');
+        }
+      });
+      renderTimeline();
+      updateHeatmapActiveDay(day);
     }
 
     /* ==========================================================================
@@ -1894,7 +2179,7 @@
     }
 
     /* ==========================================================================
-       CHECKLIST DIÁRIO
+       CHECKLIST DIÁRIO & MÉTRICAS
        ========================================================================== */
     function toggleTaskCompletion(taskId) {
       if (completedTasks[taskId]) {
@@ -1904,6 +2189,230 @@
       }
       localStorage.setItem('antigravity_completed_tasks', JSON.stringify(completedTasks));
       renderTimeline();
+      updateConsistencyUI();
+      renderHeatmap();
+    }
+
+    /* ==========================================================================
+       MÉTRICAS SEMANAIS DINÂMICAS & HEATMAP DE HÁBITOS
+       ========================================================================== */
+    function getTaskDurationMinutes(start, end) {
+      if (!start || !end) return 0;
+      const [sh, sm] = start.split(':').map(Number);
+      const [eh, em] = end.split(':').map(Number);
+      let startMin = sh * 60 + sm;
+      let endMin = eh * 60 + em;
+      if (endMin < startMin) {
+        endMin += 24 * 60; // cruza a meia-noite
+      }
+      return Math.max(0, endMin - startMin);
+    }
+
+    function formatMinutes(mins) {
+      if (mins <= 0) return '0h';
+      const h = Math.floor(mins / 60);
+      const m = mins % 60;
+      if (h === 0) return `${m}m`;
+      if (m === 0) return `${h}h`;
+      return `${h}h ${String(m).padStart(2, '0')}m`;
+    }
+
+    function calculateWeeklyStats() {
+      const statsGrid = document.getElementById('dynamicStatsGrid');
+      if (!statsGrid) return;
+
+      let trabalhoMin = 0;
+      let faculdadeMin = 0;
+      let cursoMin = 0;
+      let outrosEstudosMin = 0;
+      let saudeMin = 0;
+      let academiaTreinos = 0;
+      let casaMin = 0;
+      let espiritualidadeMin = 0;
+      let sonoMin = 0;
+      let sonoNoites = 0;
+      let relacionamentoMin = 0;
+
+      for (let d = 0; d < 7; d++) {
+        const tasks = ROUTINE_DATA[d] || [];
+        tasks.forEach(t => {
+          const dur = getTaskDurationMinutes(t.start, t.end);
+          const cat = (t.cat || '').toLowerCase();
+          const title = (t.title || '').toLowerCase();
+
+          if (cat === 'trabalho') {
+            trabalhoMin += dur;
+          } else if (title.includes('faculdade') || title.includes('ead')) {
+            faculdadeMin += dur;
+          } else if (title.includes('curso') || title.includes('prático') || title.includes('pratico')) {
+            cursoMin += dur;
+          } else if (cat === 'estudos') {
+            outrosEstudosMin += dur;
+          }
+
+          if (title.includes('academia') || (cat === 'saúde' && title.includes('treino'))) {
+            saudeMin += dur;
+            academiaTreinos++;
+          }
+
+          if (cat === 'casa' || title.includes('faxina') || title.includes('limpeza')) {
+            casaMin += dur;
+          }
+
+          if (cat === 'espiritualidade' || title.includes('religião') || title.includes('religiao') || title.includes('espiritual')) {
+            espiritualidadeMin += dur;
+          }
+
+          if (cat === 'descanso' || title.includes('dormir') || title.includes('sono')) {
+            sonoMin += dur;
+            sonoNoites++;
+          }
+
+          if (cat === 'relacionamento' || title.includes('namorada')) {
+            relacionamentoMin += dur;
+          }
+        });
+      }
+
+      const sonoMedioStr = sonoNoites > 0 ? `~${(sonoMin / sonoNoites / 60).toFixed(1)}h/noite` : '7h/noite';
+
+      const items = [
+        { label: 'Faculdade EAD', val: formatMinutes(faculdadeMin), icon: 'book-open', sub: 'Ciências Contábeis' },
+        { label: 'Curso Prático', val: formatMinutes(cursoMin), icon: 'code', sub: 'Prática contábil' },
+        { label: 'Trabalho', val: formatMinutes(trabalhoMin), icon: 'briefcase', sub: 'Expediente semanal' },
+        { label: 'Academia', val: `${academiaTreinos} treinos`, icon: 'dumbbell', sub: formatMinutes(saudeMin) },
+        { label: 'Casa & Faxina', val: formatMinutes(casaMin), icon: 'home', sub: 'Organização semanal' },
+        { label: 'Espiritualidade', val: formatMinutes(espiritualidadeMin), icon: 'sparkles', sub: 'Prática religiosa' },
+        { label: 'Sono Médio', val: sonoMedioStr, icon: 'moon', sub: `${sonoNoites} noites no plano` },
+        { label: 'Relacionamento', val: formatMinutes(relacionamentoMin), icon: 'heart', sub: 'Tempo de qualidade' }
+      ];
+
+      statsGrid.innerHTML = items.map(item => `
+        <div class="stat-box">
+          <span class="stat-label">
+            <i data-lucide="${item.icon}" class="icon" style="width: 12px; height: 12px; color: var(--accent);"></i>
+            ${item.label}
+          </span>
+          <span class="stat-val">${item.val}</span>
+          <span class="stat-sub">${item.sub}</span>
+        </div>
+      `).join('');
+
+      if (window.lucide) {
+        lucide.createIcons();
+      }
+    }
+
+    function updateConsistencyUI() {
+      let totalTasks = 0;
+      let doneTasks = 0;
+
+      for (let d = 0; d < 7; d++) {
+        const tasks = ROUTINE_DATA[d] || [];
+        totalTasks += tasks.length;
+        tasks.forEach(t => {
+          if (completedTasks[t.id]) {
+            doneTasks++;
+          }
+        });
+      }
+
+      const pct = totalTasks > 0 ? Math.round((doneTasks / totalTasks) * 100) : 0;
+
+      const pctEl = document.getElementById('consistencyScorePct');
+      const detailEl = document.getElementById('consistencyDetailText');
+      const fillEl = document.getElementById('consistencyProgressFill');
+      const badgeTextEl = document.getElementById('consistencyBadgeText');
+      const badgeEl = document.getElementById('consistencyBadge');
+
+      if (pctEl) pctEl.textContent = `${pct}%`;
+      if (detailEl) detailEl.textContent = `${doneTasks} de ${totalTasks} atividades concluídas`;
+      if (fillEl) fillEl.style.width = `${pct}%`;
+
+      if (badgeTextEl && badgeEl) {
+        if (pct === 100 && totalTasks > 0) {
+          badgeTextEl.textContent = 'Semana 100% Cumprida';
+          badgeEl.style.borderColor = 'rgba(16, 185, 129, 0.4)';
+          badgeEl.style.background = 'rgba(16, 185, 129, 0.15)';
+          badgeEl.style.color = '#10B981';
+        } else if (pct >= 70) {
+          badgeTextEl.textContent = 'Ritmo Excelente';
+          badgeEl.style.borderColor = 'rgba(59, 130, 246, 0.4)';
+          badgeEl.style.background = 'rgba(59, 130, 246, 0.15)';
+          badgeEl.style.color = 'var(--accent)';
+        } else if (pct >= 30) {
+          badgeTextEl.textContent = 'Em Progresso';
+          badgeEl.style.borderColor = 'rgba(245, 158, 11, 0.4)';
+          badgeEl.style.background = 'rgba(245, 158, 11, 0.15)';
+          badgeEl.style.color = '#F59E0B';
+        } else {
+          badgeTextEl.textContent = 'Iniciando Ciclo';
+          badgeEl.style.borderColor = 'rgba(100, 109, 120, 0.3)';
+          badgeEl.style.background = 'rgba(100, 109, 120, 0.12)';
+          badgeEl.style.color = 'var(--text-muted)';
+        }
+      }
+    }
+
+    function renderHeatmap() {
+      const grid = document.getElementById('habitHeatmapGrid');
+      if (!grid) return;
+
+      const daysMeta = [
+        { day: 1, short: 'Seg' },
+        { day: 2, short: 'Ter' },
+        { day: 3, short: 'Qua' },
+        { day: 4, short: 'Qui' },
+        { day: 5, short: 'Sex' },
+        { day: 6, short: 'Sáb' },
+        { day: 0, short: 'Dom' }
+      ];
+
+      grid.innerHTML = daysMeta.map(dMeta => {
+        const tasks = ROUTINE_DATA[dMeta.day] || [];
+        const total = tasks.length;
+        let done = 0;
+        tasks.forEach(t => {
+          if (completedTasks[t.id]) done++;
+        });
+
+        const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+        const isActive = (dMeta.day === selectedDay);
+
+        let fillColor = 'var(--bg-tertiary)';
+        if (pct === 100 && total > 0) fillColor = '#10B981';
+        else if (pct >= 50) fillColor = 'var(--accent)';
+        else if (pct > 0) fillColor = '#F59E0B';
+
+        return `
+          <div class="heatmap-pill ${isActive ? 'is-active-day' : ''}" id="heatmap-day-${dMeta.day}" onclick="selectDay(${dMeta.day})" title="${dMeta.short}: ${done}/${total} tarefas concluídas (${pct}%)">
+            <span class="heatmap-day-tag">${dMeta.short}</span>
+            <div class="heatmap-bar-wrap">
+              <div class="heatmap-bar-fill" style="width: ${pct}%; background-color: ${fillColor};"></div>
+            </div>
+            <span class="heatmap-pct-tag">${pct}%</span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function updateHeatmapActiveDay(day) {
+      const pills = document.querySelectorAll('.heatmap-pill');
+      pills.forEach(p => p.classList.remove('is-active-day'));
+      const activePill = document.getElementById(`heatmap-day-${day}`);
+      if (activePill) {
+        activePill.classList.add('is-active-day');
+      }
+    }
+
+    function resetWeeklyChecklist() {
+      if (confirm('Deseja iniciar um novo ciclo semanal? Todas as caixas de tarefas concluídas serão desmarcadas para recomeçar a semana, mas todos os seus horários configurados permanecerão intactos.')) {
+        completedTasks = {};
+        localStorage.setItem('antigravity_completed_tasks', JSON.stringify(completedTasks));
+        renderTimeline();
+        updateConsistencyUI();
+        renderHeatmap();
+      }
     }
 
     /* ==========================================================================
